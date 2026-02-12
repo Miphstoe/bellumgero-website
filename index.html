@@ -1,0 +1,1594 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bellum Gero - Star Wars Galaxies Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Bellum Gero - A custom Star Wars Galaxies server with boosted rates, unique features, and epic endgame content."
+  />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #050712;
+      --bg-alt: #0e111f;
+      --accent: #f6c945;
+      --accent-soft: rgba(246, 201, 69, 0.25);
+      --text: #f5f7ff;
+      --muted: #a5acc7;
+      --discord: #5865f2;
+      --facebook: #1877f2;
+      --twitter: #1da1f2;
+      --paypal: #0070ba;
+      --gh: #00cc66;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 0 40px rgba(0, 0, 0, 0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Roboto", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 10% 20%, #1a1c33 0, transparent 50%),
+        radial-gradient(circle at 80% 0, #23294a 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, #111628 0, transparent 50%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 50% 80%, rgba(255,255,255,0.5), transparent);
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    .wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+      width: 100%;
+      flex: 1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .logo-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .logo-main {
+      font-family: "Orbitron";
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .logo-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Simple inline status text under header */
+    .inline-status {
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,0.9fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .hero-main {
+      background: linear-gradient(140deg, rgba(0,0,0,0.7), rgba(15,18,40,0.95));
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 26px 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .tagline {
+      font-family: "Orbitron";
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: "Orbitron";
+      font-weight: 800;
+      font-size: clamp(1.8rem,3vw,2.3rem);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span { color: var(--accent); }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      line-height: 1.5;
+      max-width: 32rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      transition: 0.12s ease;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg,var(--accent),#fce38a);
+      color: #151515;
+      box-shadow: 0 0 18px rgba(246,201,69,0.45);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-outline {
+      background: rgba(10,11,25,0.9);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-outline:hover { background: rgba(19,21,40,0.9); }
+
+    .download-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 5px 9px;
+      background: rgba(0,0,0,0.35);
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: rgba(6,8,22,0.95);
+      padding: 16px;
+    }
+
+    .card-title {
+      font-family: "Orbitron";
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .card-body { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+    .card-body ul { list-style: none; padding-left: 0; margin-top: 8px; }
+
+    .card-body li::before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .card-body a { color: var(--text); text-decoration: none; }
+    .card-body a:hover { color: var(--accent); }
+
+    .section {
+      margin-top: 20px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: "Orbitron";
+      color: var(--accent);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: minmax(0,0.9fr) minmax(0,1.3fr) minmax(0,1fr);
+      gap: 16px;
+    }
+
+    @media (max-width:900px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    .features-list {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 18px;
+      background: rgba(6,7,20,0.96);
+      max-height: 520px;
+      overflow-y: auto;
+      font-size: 0.92rem;
+    }
+
+    .features-list h3 {
+      font-family: "Orbitron";
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .features-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .features-list li {
+      margin-bottom: 6px;
+      padding-left: 18px;
+      color: var(--muted);
+      position: relative;
+    }
+
+    .features-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    .features-callout {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--accent-soft);
+      background: rgba(7,10,20,0.96);
+      padding: 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* EVENTS CARD (LEFT OF SERVER FEATURES) */
+    .events-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: rgba(6,7,20,0.96);
+      padding: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .events-card h3 {
+      font-family: "Orbitron";
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .events-card h4 {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .events-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+
+    .events-card li {
+      margin-bottom: 4px;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .events-card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    /* PATCH NOTES CARD (SCROLLABLE) */
+    .patch-notes-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background: rgba(6,7,20,0.96);
+      padding: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    .patch-notes-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 6px;
+    }
+
+    .patch-notes-title-line {
+      font-family: "Orbitron";
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .patch-notes-date {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .patch-notes-subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .patch-notes-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 4px;
+      margin-bottom: 10px;
+    }
+
+    .patch-notes-list li {
+      margin-bottom: 8px;
+    }
+
+    .patch-notes-list strong {
+      color: var(--text);
+    }
+
+    .patch-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 12px 0;
+    }
+
+    /* SERVER STATUS WIDGET */
+    .server-status-widget {
+      position: fixed;
+      left: 16px;
+      top: 120px;
+      z-index: 999;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(5, 7, 18, 0.92);
+      color: #f5f7ff;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.6);
+      font-family: "Roboto";
+    }
+
+    .server-status-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .server-status-value { font-weight: 600; }
+
+    .server-status-uptime {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .server-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: gray;
+    }
+
+    .server-online .server-status-dot { background: #34c759; }
+    .server-online .server-status-value { color: #34c759; }
+
+    .server-offline .server-status-dot { background: #ff3b30; }
+    .server-offline .server-status-value { color: #ff3b30; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.85em;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: var(--text);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SERVER STATUS WIDGET -->
+  <div id="server-status-widget" class="server-status-widget server-offline">
+    <div class="server-status-dot"></div>
+    <div>
+      <div class="server-status-label">Game Server</div>
+      <div class="server-status-value" id="server-status-text">Checking…</div>
+      <div class="server-status-uptime" id="server-status-uptime">Uptime: --</div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <header>
+      <div class="logo-title">
+        <div class="logo-main">BELLUM GERO</div>
+        <div class="logo-sub">Star Wars Galaxies Classic+ Server</div>
+      </div>
+
+      <nav>
+        <a
+          href="http://15.204.163.178/tre/BellumGero%20Launcher_0.1.0_x64-setup.exe"
+          download="BellumGero_Launcher_0.1.0_x64-setup.exe"
+        >Play Now</a>
+        <a href="#features">Server Features</a>
+        <a href="#patch-notes">Patch Notes</a>
+        <a href="#community">Community</a>
+      </nav>
+    </header>
+
+    <!-- SIMPLE INLINE STATUS ROW -->
+    <p class="inline-status">
+      Server Status:
+      <span id="server-status" style="font-weight:bold;">Checking...</span>
+    </p>
+
+    <main>
+
+      <!-- HERO -->
+      <section class="hero" id="play">
+        <div class="hero-main">
+          <div class="tagline">A Different Kind of Galaxy</div>
+          <h1 class="hero-title">Welcome to <span>Bellum Gero</span></h1>
+
+          <p class="hero-subtitle">
+            A Star Wars Galaxies server focused on fast progression, powerful tools
+            for builders and city mayors, and challenging endgame content.
+          </p>
+
+          <div class="hero-actions">
+
+            <!-- PLAY NOW BUTTON -->
+            <a
+              class="btn btn-primary"
+              href="http://15.204.163.178/tre/BellumGero%20Launcher_0.1.0_x64-setup.exe"
+              download="BellumGero_Launcher_0.1.0_x64-setup.exe"
+            >
+              ▶ Play Now
+            </a>
+
+            <a class="btn btn-outline" href="https://discord.gg/jSsR2hQZGw" target="_blank" rel="noopener">Join Discord</a>
+            <a class="btn btn-outline" href="https://www.facebook.com/groups/2255603491594451" target="_blank" rel="noopener">Facebook Group</a>
+            <a class="btn btn-outline" href="https://twitter.com/BellumGeroSWG" target="_blank" rel="noopener">Twitter / X</a>
+            <a class="btn btn-outline" href="https://www.paypal.com/paypalme/scottedwards1926" target="_blank" rel="noopener">Donate Now</a>
+            <a class="btn btn-outline" href="https://galaxyharvester.net/ghHome.py?" target="_blank" rel="noopener">Galaxy Harvester</a>
+
+          </div>
+
+          <p class="download-hint">
+            Clicking <strong>Play Now</strong> will download the Bellum Gero Launcher installer.
+          </p>
+
+          <div class="hero-meta">
+            <span class="pill"><strong>10x XP</strong> for everything</span>
+            <span class="pill">World bosses</span>
+            <span class="pill">Builder-friendly housing</span>
+          </div>
+        </div>
+
+        <aside class="hero-side" id="community">
+          <div class="card">
+            <div class="card-title">Join the Community</div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://discord.gg/jSsR2hQZGw" target="_blank" rel="noopener">Discord Server</a></li>
+                <li><a href="https://www.facebook.com/groups/2255603491594451" target="_blank" rel="noopener">Facebook Group</a></li>
+                <li><a href="https://twitter.com/BellumGeroSWG" target="_blank" rel="noopener">@BellumGeroSWG on Twitter</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Support the Server</div>
+            <div class="card-body">
+              Donations help cover hosting costs and keep Bellum Gero running.
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="section" id="features">
+        <div class="section-title">Server Features</div>
+
+        <div class="features-grid">
+
+          <!-- EVENTS COLUMN (LEFT) -->
+          <aside class="events-card">
+            <h3>Upcoming Events</h3>
+            <h4>Invasion of the Acklay Bosses in Valhalla</h4>
+            <ul>
+              <li><strong>Date:</strong> Sunday, February 15th, 2026</li>
+              <li><strong>Time:</strong> 2:00 PM EST</li>
+              <li><strong>Location:</strong> Valhalla, Corellia</li>
+            </ul>
+            <p>
+              Please arrive early by the Beach behind the shuttleport in Valhalle. Grouping for the event
+              will begin around <strong>1:00 PM EST</strong> so everyone can be organized
+              and ready for the assault.
+            </p>
+            <p>
+              <strong>Buffs and resses will be provided</strong> on-site to keep the
+              rebellion in full force. Bring your best gear, your best friends,
+              and be ready to stand with the Wookiees!
+            </p>
+          </aside>
+
+<!-- SERVER FEATURES COLUMN (CENTER) -->
+<div class="features-list">
+  <h3>Gameplay Changes</h3>
+  <ul>
+    <li>10x XP rates across all professions</li>
+    <li>10 maximum characters, 4 online simultaneously</li>
+    <li>200 items per lot for housing</li>
+    <li>Custom Branch Unlock System (replaces traditional Village phase system)</li>
+    <li>Village skill trees cost 0 skill points</li>
+    <li>Improved repairs &amp; reduced armor decay</li>
+    <li>Build any structure style on any planet</li>
+    <li>50% reduced city maintenance (7-day cycle)</li>
+    <li>Starter NPCs located at major starports</li>
+    <li>Enhanced loot drops &amp; container rates</li>
+    <li>Factory crates hold up to 1,000 items</li>
+    <li>Increased walk and vehicle speed</li>
+    <li>Galaxy-wide grouping system</li>
+    <li>Maximum sockets on all crafted gear</li>
+    <li>Reduced crafting and factory production times</li>
+    <li>Enhanced entertainer buffs</li>
+    <li>Groups expanded to 50 players</li>
+    <li>Increased XP caps</li>
+    <li>Instant vehicle, pet, and droid summoning</li>
+    <li>Junk dealers purchase nearly all items</li>
+    <li>Mission terminals with difficulty selector</li>
+    <li>Rebalanced armor with standardized stats</li>
+    <li>Selectable slicing with improved success rates</li>
+    <li>500-use melee weapon power-ups</li>
+    <li>Universal shuttleport travel (planet-to-planet)</li>
+    <li>/arealoot and /harvestarea commands</li>
+    <li>Serverwide Safety Deposit Box system</li>
+    <li>Vendor relist functionality</li>
+    <li>Reworked endgame cave content</li>
+    <li>Randomly spawning world bosses</li>
+    <li>House pack-up system with item placement saving</li>
+    <li>Maintenance removal option for structures</li>
+    <li>Attachment Exchange Vendor</li>
+  </ul>
+
+  <h3>Professions</h3>
+  <ul>
+    <li>Entertainers can buff all three Mind stats (Master Dancer + Musician)</li>
+    <li>Extensive Jedi profession enhancements</li>
+    <li>Master Politician unlock for 50,000 credits (no XP required)</li>
+  </ul>
+</div>
+
+          <!-- CALLOUT COLUMN (RIGHT) -->
+          <aside class="features-callout">
+            <p><strong>BELLUM GERO</strong> brings classic SWG to life with modern improvements, faster progression, and tons of new content.</p>
+            <p>Adventure awaits—log in and explore!</p>
+          </aside>
+
+        </div>
+      </section>
+
+      <!-- PATCH NOTES -->
+      <section class="section" id="patch-notes">
+        <div class="section-title">Patch Notes</div>
+
+        <div class="patch-notes-card">
+
+<!-- PATCH NOTES (2/10/2026) -->
+<section id="patch-notes" class="section">
+  <div class="section-inner">
+    <h2 class="section-title">Patch Notes</h2>
+
+    <div class="patch-entry">
+      <div class="patch-header">
+        <h3 class="patch-title">Bellum Gero Patch Notes — February 10, 2026</h3>
+        <p class="patch-subtitle">
+          Today’s publish introduces new world content, Creature Handler enhancements, Village progression updates,
+          and several important bug fixes and stability improvements.
+        </p>
+      </div>
+
+      <div class="patch-block">
+        <h4>New Content &amp; Additions</h4>
+        <ul>
+          <li>
+            <strong>Torgas the Enslaver (World Boss)</strong> will now spawn on <strong>Tatooine</strong> in the
+            <strong>southeastern quadrant</strong> of the planet.
+          </li>
+          <li>
+            <strong>New Creature (Endor):</strong> Added the <strong>Azure Striped Peko</strong>.
+          </li>
+          <li>
+            <strong>Lord Nyax Loot Update:</strong> Added loot group <code>bg_token</code> to Lord Nyax, which will also
+            have a chance to drop the <strong>Holocron of Destiny</strong>.
+          </li>
+          <li>
+            <strong>New Attachments:</strong> Added new <strong>Clothing</strong> and <strong>Armor Attachments</strong>
+            for <strong>Creature Handler</strong> and <strong>Ranger</strong>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="patch-block">
+        <h4>Creature Handler Improvements</h4>
+        <ul>
+          <li>
+            <strong>Pet Level Cap Increased:</strong> Creature Handlers’ maximum pet level cap has been increased to
+            <strong>105</strong> (with tapes).
+          </li>
+        </ul>
+      </div>
+
+      <div class="patch-block">
+        <h4>Village &amp; Jedi Progression</h4>
+        <ul>
+          <li>
+            Added the village outro <strong>Rite of Awakening</strong> to complete the <strong>Jedi Progression Overhaul</strong>.
+          </li>
+          <li>
+            A full guide has been posted in <strong>Discord</strong>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="patch-block">
+        <h4>Fixes &amp; Stability</h4>
+        <ul>
+          <li>
+            <strong>House Pack-Up Fix:</strong> The system will no longer count the house as an item (preventing it from
+            disappearing) and will now work properly.
+          </li>
+          <li>
+            Fixed an issue with <strong>Powerups</strong> not deleting after all uses were consumed.
+          </li>
+          <li>
+            Fixed cloning behavior in the <strong>Blue Shadow Virus Bunker</strong> — poison and disease effects now properly reset upon death.
+          </li>
+          <li>
+            Reverted <strong>junk item stacking</strong> to avoid duplication exploits.
+          </li>
+        </ul>
+      </div>
+
+      <div class="patch-callout">
+        <h4>Client Update Required (TRE Update)</h4>
+        <p>
+          This publish includes a <strong>TRE update</strong>. Please <strong>close all clients</strong> and run a
+          <strong>Full Scan</strong> on your launcher to download the latest files.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWEST PATCH FIRST: FEBRUARY 3, 2026 -->
+<div class="patch-notes-header">
+  <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+  <div class="patch-notes-date">🗓️ February 3, 2026</div>
+</div>
+
+<div class="patch-notes-subtitle">
+  This update includes important fixes, new mission reward tuning, new vendors/NPC services, and a redesigned unlock process to begin your Jedi journey.
+  <br /><br />
+  <strong>Client Update Notice:</strong> This patch includes a <strong>TRE update</strong>. Please <strong>close all clients</strong> and run a <strong>Full Scan</strong> before logging back in.
+</div>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Fixes &amp; Improvements</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Bio-Engineered Pets — Plague Strike</strong><br />
+    Fixed an issue preventing Bio-Engineered Pets from properly applying <strong>Plague Strike</strong>. The effect will now stick as intended.
+  </li>
+
+  <li>
+    <strong>Stacked Item Stability</strong><br />
+    Fixed an issue where stacked items were not correctly becoming unstable. Stacked items will now become unstable when used via the <strong>radial menu</strong>.
+  </li>
+
+  <li>
+    <strong>Paralope Missions (Corellia) — Increased Wooly Hide</strong><br />
+    <strong>Giant</strong> and <strong>Ancient</strong> Paralope missions on <strong>Corellia</strong> will now drop more <strong>Wooly Hide</strong> than their lesser counterparts.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">New Features</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Holocron of Destiny Buyback Vendor (Coronet)</strong><br />
+    A new vendor has been placed in <strong>Coronet</strong> that will purchase unwanted <strong>Holocrons of Destiny</strong>.
+  </li>
+
+  <li>
+    <strong>“The Path” — Bounty Removal Service</strong><br />
+    A new NPC called <strong>“The Path”</strong> has been placed in the <strong>Mos Eisley</strong> and <strong>Lok</strong> cantinas.<br />
+    For a price, this NPC will remove you from the <strong>Bounty Hunter terminals</strong>.
+  </li>
+
+  <li>
+    <strong>Village of Aurillia — New Unlock Process</strong><br />
+    A new unlock process is now required to enter the <strong>Village of Aurillia</strong> and begin your Jedi journey.<br /><br />
+    Visit the <strong>Hermit</strong> at the <strong>Dathomir Science Outpost</strong> to start the quest. You will receive waypoints to <strong>three Shrines</strong> located on:
+    <ul style="margin-top: 6px; padding-left: 18px; list-style: disc;">
+      <li><strong>Naboo</strong></li>
+      <li><strong>Corellia</strong></li>
+      <li><strong>Dantooine</strong></li>
+    </ul>
+    Shrines must be completed <strong>in order</strong>. At each shrine, kneel and meditate for <strong>30 seconds</strong>.<br />
+    Use <code>/checkforcestatus</code> to verify your progression status.
+  </li>
+</ul>
+
+<hr class="patch-divider" />
+
+<!-- NEWEST PATCH FIRST: JANUARY 30, 2026 -->
+<div class="patch-notes-header">
+  <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+  <div class="patch-notes-date">🗓️ January 30, 2026</div>
+</div>
+
+<div class="patch-notes-subtitle">
+  This update expands Blue Shadow Virus rewards, introduces PvP-only combat balance adjustments for Jedi vs. Bounty Hunters, improves powerup balance, and includes multiple system updates and fixes.
+  <br /><br />
+  <strong>Client Update Notice:</strong> This patch includes a <strong>TRE update</strong>. Please <strong>close all clients</strong> and run a <strong>Full Scan</strong> before logging back in.
+</div>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">New Items</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Blue Shadow Virus Rewards Expanded</strong><br />
+    Added <strong>4 new holograms</strong> to the Blue Shadow Virus reward pool.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Combat Balance (PvP Only)</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Jedi vs. Bounty Hunter PvP Adjustments</strong><br />
+    Implemented PvP-only balance changes for Jedi vs. Bounty Hunter combat:
+    <ul style="margin-top: 6px; padding-left: 18px; list-style: disc;">
+      <li><strong>Saber Block</strong> reduced by <strong>10%</strong> in PvP only</li>
+      <li><strong>Jedi State Defense</strong> lowered in PvP</li>
+      <li><strong>PvE is not affected</strong> by these changes</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Balance &amp; Progression Updates</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Crafter Powerups Rebalanced</strong><br />
+    Updated crafted powerups to improve balance:
+    <ul style="margin-top: 6px; padding-left: 18px; list-style: disc;">
+      <li><strong>Primary stat</strong> capped at <strong>40%</strong></li>
+      <li><strong>Secondary stats</strong> capped at <strong>20%</strong></li>
+    </ul>
+  </li>
+  <li>
+    <strong>Holocron of Destiny — Account Trade Update</strong><br />
+    Holocron of Destiny is now <strong>tradable between characters on the same account</strong>.
+  </li>
+  <li>
+    <strong>Holocron of Destiny — Crafting Success Rate Adjusted</strong><br />
+    Updated the success rate for obtaining a Holocron of Destiny during the crafting process.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Community &amp; Administration</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Bellum Gero Hub — Advertisement Moderation</strong><br />
+    Updated the Advertisement Space on the Bellum Gero Hub to include an <strong>Admin option</strong> to delete ads that do not follow the community guidelines.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Fixes</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>House Packup</strong><br />
+    Fixed an issue where a house could disappear when selecting the House Packup option.<br />
+    Houses will no longer disappear during packup.
+  </li>
+</ul>
+
+<hr class="patch-divider" />
+```
+
+          <!-- NEWEST PATCH FIRST: JANUARY 27, 2026 -->
+<div class="patch-notes-header">
+  <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+  <div class="patch-notes-date">🗓️ January 27, 2026</div>
+</div>
+
+<div class="patch-notes-subtitle">
+  This update introduces a new Village branch unlock system for Jedi progression, expands loot tables, adds new weapon powerups, and includes multiple fixes and quality-of-life improvements.
+</div>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">New Feature</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Custom JEDI Branch Unlock System (Holocron of Destiny)</strong><br />
+    Once a player unlocks access to the Village, they may use a <strong>Holocron of Destiny</strong> to unlock a <strong>random Village branch</strong>.<br />
+    Players can complete that branch or use additional Holocrons to unlock more random branches.<br />
+    After completing <strong>6 Village branches</strong>, players become eligible for the <strong>second Old Man visit</strong> and can then defeat <strong>Mellichae</strong> to begin <strong>Padawan Trials</strong>.<br /><br />
+    <strong>How to Obtain:</strong><br />
+    • Hunt creatures that drop <strong>Bellum Gero Tokens</strong> for a chance to obtain a Holocron of Destiny<br />
+    • Assemble required components via <strong>crafting</strong>
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">New Items</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Damage Type Powerups (7 New Variants)</strong><br />
+    Added 7 new Damage Type Powerups that convert a weapon’s damage type to one of the following:<br />
+    <strong>Acid, Blast, Cold, Electricity, Energy, Heat, Kinetic</strong>.<br />
+    Works with both <strong>Melee</strong> and <strong>Ranged</strong> weapons.<br />
+    These can be obtained by completing <strong>Treasure Maps</strong>.<br />
+    Each Powerup includes <strong>2,500 uses</strong>.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Quality of Life Improvements</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Inventory Stacking Improvements</strong><br />
+    Select junk-style items will now stack in inventory, helping reduce clutter and save space for valuable loot.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Loot &amp; Economy Updates</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Imperial Weapon Stock Added to Loot Tables</strong><br />
+    Added <strong>Imperial Weapon Stock</strong> to loot groups for both <strong>Imperial</strong> and <strong>Rebel</strong> NPCs.
+  </li>
+  <li>
+    <strong>Expanded Token Drops</strong><br />
+    Added the <strong>Bellum Gero Token</strong> loot group to <strong>Rancors on Dathomir</strong> and <strong>Graks on Endor</strong>.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Balance &amp; Spawn Updates</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>RIS Armor Adjustments</strong><br />
+    Adjusted RIS built-in resistance to <strong>Stun</strong> and <strong>Lightsaber (LS)</strong>.<br />
+    Made minor adjustments to RIS pieces to accommodate this change.
+  </li>
+  <li>
+    <strong>Temple Spawns Updated</strong><br />
+    Increased spawns for <strong>Woolamanders</strong> in the Temple to improve encounter flow and farming consistency.
+  </li>
+  <li>
+    <strong>DNA Harvest Extraction Increased</strong><br />
+    Increased DNA Harvest extraction values to improve rewards and progression pacing.
+  </li>
+</ul>
+
+<h4 style="margin: 10px 0 6px; color: var(--text);">Fixes</h4>
+<ul class="patch-notes-list">
+  <li>
+    <strong>Resource Deeds — Bellum Gero Hub</strong><br />
+    Fixed an issue where Resource Deeds were not purchasing at the correct amount from the Bellum Gero Hub.
+  </li>
+  <li>
+    <strong>Factory Crate Clothing Colorization</strong><br />
+    Fixed clothing extracted from factory crates being unable to change color.
+  </li>
+  <li>
+    <strong>Bestine Curator Quest Phase Timing</strong><br />
+    Fixed phase change time from <strong>15 days</strong> to <strong>3 days</strong>.
+  </li>
+  <li>
+    <strong>Bellum Gero Hub</strong><br />
+    Added a new option on the Bellum Gero Hub.
+  </li>
+</ul>
+
+<hr class="patch-divider" />
+          <!-- NEWEST PATCH FIRST: JANUARY 23, 2026 (HOT FIX) -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Hot Fix Notes</div>
+            <div class="patch-notes-date">🗓️ January 23, 2026</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            This hot fix introduces new Endor hunt content, adjusts high-end loot tables, and includes encounter tuning aimed at improving overall server stability.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">New PvE Content</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Bone Crushing Grak Added to Mission Terminals</strong><br />
+              Bone Crushing Grak has been added to <strong>Mission Terminals on Endor</strong>, allowing players to actively pull missions for this encounter.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Loot &amp; Encounter Updates</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Jar Jar Binks Encounter – Loot Distribution Updated</strong><br />
+              Loot distribution has been adjusted in an effort to resolve recent <strong>segmentation fault crashes</strong> associated with the encounter. Stability will continue to be monitored.
+            </li>
+            <li>
+              <strong>Grand &amp; Ancient Krayt Dragon Loot Tables Updated</strong><br />
+              Removed <strong>common components</strong> from the loot tables of Grand and Ancient Krayt Dragons to improve reward quality for these high-end encounters.
+            </li>
+          </ul>
+
+          <hr class="patch-divider" />
+
+          <!-- NEWEST PATCH FIRST: JANUARY 22, 2026 (HOT FIX) -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Hot Fix Notes</div>
+            <div class="patch-notes-date">🗓️ January 22, 2026</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            This hot fix adjusts world boss timings, resolves an issue with the Bellum Gero Hub on Yavin 4, adds new structure skill mods, and includes stability improvements to help reduce potential crashes.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">World Boss Adjustments</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Ancient Krayt Dragon &amp; Grand Krayt Dragon Respawn Timer</strong><br />
+              Adjusted respawn timer to <strong>90 minutes</strong>.
+            </li>
+            <li>
+              <strong>World Boss Broadcast Timing Updates</strong><br />
+              Adjusted broadcast timing for the <strong>Acklay World Boss</strong> and <strong>Fire Spider World Boss</strong> to improve notification accuracy and event flow.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Fixes &amp; Improvements</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Bellum Gero Hub (Yavin 4 Imperial Outpost)</strong><br />
+              Fixed an issue affecting the Bellum Gero Hub on <strong>Yavin 4</strong> at the <strong>Imperial Outpost</strong>.
+            </li>
+            <li>
+              <strong>Mustafarian Bunker — New Skill Mods</strong><br />
+              Added Skill Mods for <strong>Architect Assembly</strong> and <strong>Architect Experimentation</strong> to the <strong>Mustafarian Bunker</strong>.
+            </li>
+            <li>
+              <strong>Stability Update</strong><br />
+              Implemented a fix targeting potential <strong>segmentation fault crashes</strong>. We will continue monitoring for any additional stability improvements needed.
+            </li>
+          </ul>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCHES CONTINUE BELOW (UNCHANGED) -->
+
+          <!-- NEWEST PATCH FIRST: JANUARY 20, 2026 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ January 20, 2026</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            This update reintroduces House Pack-Up with vendor detection, expands Junk Dealer functionality, adds new Endor hunt content, updates crafting progression rules, and includes a world boss respawn adjustment.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Reintroduced Feature</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>House Pack-Up System (With Vendor Detection)</strong><br />
+              House Pack-Up has been reintroduced with vendor detection enabled.<br />
+              <strong>Only the house owner</strong> may pack up a structure.<br />
+              Administrators no longer have access to this command.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Quality of Life Improvements</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Simplified Structure Destruction Confirmation</strong><br />
+              When destroying a structure, you now only need to type <strong>yes</strong> to confirm.<br />
+              The random number confirmation has been removed.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Economy &amp; Vendor Updates</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Junk Dealer — Treasure Map Support</strong><br />
+              Junk Dealers will now purchase <strong>all Treasure Maps</strong> using the <strong>Sell All</strong> option.<br />
+              Treasure Maps sell for <strong>1,000 credits each</strong>.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">New PvE Content</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>New Creature &amp; Missions on Endor</strong><br />
+              Added a new Endor creature: <strong>Death Stalking Grak</strong>.<br />
+              New missions are now available on <strong>Endor</strong>.<br />
+              These encounters are similar to <strong>Enraged Bull Rancors</strong> from Dathomir, providing additional high-end hunting options with new scenery.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Skill &amp; Profession Changes</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Crafting &amp; Merchant Skill Adjustments</strong><br />
+              <strong>Merchant</strong> is now <strong>free</strong> of skill point cost.<br />
+              <strong>Novice Artisan</strong> now costs <strong>5 skill points</strong>.<br />
+              This allows Artisans to master <strong>three Elite crafting professions</strong> and maintain <strong>Master Merchant</strong>.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">World Boss Adjustments</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Acklay Respawn Timer Updated</strong><br />
+              Changed the <strong>Acklay</strong> respawn timer to approximately <strong>every 45 minutes</strong>.
+            </li>
+          </ul>
+
+          <div class="patch-notes-subtitle" style="margin-top: 6px;">
+            <strong>Client Update Notice:</strong> Tonight’s patch includes a <strong>TRE update</strong>.<br />
+            Please <strong>close all clients</strong> and run a <strong>Full Scan</strong> before logging back in.
+          </div>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCH: JANUARY 16, 2026 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ January 16, 2026</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            This update adds a new server-wide Jedi Knight milestone broadcast, improves several quality-of-life systems, and resolves multiple progression and vendor-related issues.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">New Feature</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Jedi Knight Galaxy Broadcast</strong><br />
+              A galaxy-wide broadcast will now announce when a player reaches <strong>Light Side</strong> or <strong>Dark Side Jedi Knight</strong>, recognizing this milestone across the server.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Quality of Life Improvements</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Vehicle Garage Range Increased</strong><br />
+              Vehicle Garage repair range has been increased from <strong>64m</strong> to <strong>96m</strong>, allowing greater flexibility when repairing vehicles.
+            </li>
+            <li>
+              <strong>Ranger Camp Duration Updated</strong><br />
+              Ranger Camps will now persist for <strong>2 hours</strong> from the time of placement, even if the camp is abandoned.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Fixes &amp; Bug Resolutions</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Jedi Padawan Trials</strong><br />
+              Fixed an issue causing Jedi Padawan Trials to not progress properly.
+            </li>
+            <li>
+              <strong>Jedi Knight Trials – Path Selection Window</strong><br />
+              Fixed a bug where Jedi Knight Trials could not continue if the path selection window was accidentally closed.
+            </li>
+            <li>
+              <strong>Crystal Exchange</strong><br />
+              Resolved an issue with the Crystal Exchange.
+            </li>
+            <li>
+              <strong>Bellum Gero Token Vendors</strong><br />
+              Fixed Bellum Gero Token Vendors.
+            </li>
+            <li>
+              <strong>Guild Title Display</strong><br />
+              Fixed Guild Title display showing multiple titles instead of the correct active title.
+            </li>
+          </ul>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCH: JANUARY 13, 2026 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ January 13, 2026</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            This update introduces a new city-wide advertising system, improves vendor deed listing behavior, and resolves an issue where guild titles were not consistently visible after zone travel.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">New Feature</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>City Ad System (Bellum Gero Hub)</strong><br />
+              Players can now purchase Ads from the <strong>Bellum Gero Hub</strong>. Ads will bark in major cities every <strong>30 seconds</strong>.<br />
+              <strong>Limits:</strong> Up to <strong>50</strong> ads can be stored, and each ad can be up to <strong>255 characters</strong>.<br />
+              <strong>Cost:</strong> <strong>100,000 credits</strong> for <strong>1 week</strong> of ad time.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Fixes &amp; Updates</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Vendor Deed Listing Name (Possible Fix)</strong><br />
+              A potential fix has been applied for <strong>building deeds</strong> not showing the name of the deed on vendors. This will continue to be monitored.
+            </li>
+            <li>
+              <strong>Guild Title Visibility</strong><br />
+              Fixed an issue where <strong>guild titles</strong> were not showing to other players and could disappear after traveling to a new zone.
+            </li>
+          </ul>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCH: JANUARY 8, 2026 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ January 8, 2026</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            This update introduces new guild title display support, expands armor experimentation options, and delivers key quality-of-life and eligibility fixes across progression content.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">New Features</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Guild Titles Display</strong><br />
+              Players can now display <strong>Guild Titles</strong>.<br />
+              Guild Titles can be assigned through the <strong>Guild Management Terminal</strong>.
+            </li>
+            <li>
+              <strong>Armor Experimentation Enhancement</strong><br />
+              <strong>Stun</strong> can now be experimented on <strong>Armor Vulnerabilities</strong>.
+            </li>
+            <li>
+              <strong>Ranger Quality of Life</strong><br />
+              Rangers can now use the <strong>All-in-One Survey Tool</strong> to locate resource hot spots.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Fixes &amp; Updates</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Knight Trials</strong><br />
+              Players will now properly see the <strong>Shrine</strong> to begin Knight Trials as soon as (or any time after) they become eligible.
+            </li>
+            <li>
+              <strong>City Hall Management</strong><br />
+              City Hall Management Terminals now function correctly for <strong>Mayors with Artisan</strong>.
+            </li>
+            <li>
+              <strong>The Warren</strong><br />
+              Container timer reduced to <strong>15 minutes</strong>.
+            </li>
+          </ul>
+
+          <div class="patch-notes-subtitle">
+            <strong>Client Update Notice:</strong> No TRE update is required for this patch, and no client restart or Full Scan is necessary.
+          </div>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCH: DECEMBER 23, 2025 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ December 23, 2025</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            The galaxy continues to evolve with this update, introducing expanded musical functionality, enhanced decorative item customization, and meaningful improvements to Force Ranking System (FRS) progression through PvE content.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Changes</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Musician Instrument Expansion</strong><br />
+              Musicians can now perform using the <strong>Decorative Omni Box</strong> and <strong>Nalargon</strong>.
+            </li>
+            <li>
+              <strong>Decorative Item Naming</strong><br />
+              Decorative items placed inside <strong>houses</strong> or stored in <strong>backpacks</strong> can now have their names customized via the <strong>radial menu</strong>.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Additions &amp; Improvements</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>FRS Experience via PvE (Wild Spawns)</strong><br />
+              The following NPCs now grant <strong>FRS Experience</strong> when defeated in the wild:
+              <ul style="margin-top: 6px; padding-left: 18px; list-style: disc;">
+                <li>Dark Jedi Adepts</li>
+                <li>Dark Jedi Knights</li>
+                <li>Dark Jedi Masters</li>
+                <li>Nightsister Elders</li>
+                <li>Shadow Mountain Clan Councilwomen</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Increased FRS Rewards</strong><br />
+              FRS experience rewards have been increased within:
+              <ul style="margin-top: 6px; padding-left: 18px; list-style: disc;">
+                <li><strong>Force Crystal Cave (FCC)</strong></li>
+                <li><strong>Old Rancor Cave</strong></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="patch-notes-subtitle">
+            As always, thank you for playing on <strong>Bellum Gero</strong>. More updates coming soon.
+          </div>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCH: SEPTEMBER 16, 2025 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ September 16, 2025</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            The galaxy continues to evolve. This update introduces important fixes,
+            a new quality-of-life command, and expanded housing functionality through
+            newly added structure skill modifiers.
+          </div>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Fixes</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>Colored Waypoints</strong> are now functioning correctly.<br />
+              Command: <code>/waypointcolor</code>
+            </li>
+            <li>
+              <strong>Item Lock System</strong> has been fixed and is now operating as intended.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">New Feature</h4>
+          <ul class="patch-notes-list">
+            <li>
+              <strong>/gohome Command</strong><br />
+              Instantly transports you to your declared residence.<br />
+              Can be used once every 4 hours.
+            </li>
+          </ul>
+
+          <h4 style="margin: 10px 0 6px; color: var(--text);">Housing Enhancements — Skill Modifiers</h4>
+          <div class="patch-notes-subtitle">The following structures now provide passive crafting bonuses while inside:</div>
+          <ul class="patch-notes-list">
+            <li><strong>Commando Bunker</strong> — Armor Assembly +10, Weapon Assembly +10, Experimentation +5, Repair +5</li>
+            <li><strong>Jedi Meditation Structure</strong> — Lightsaber Assembly +10, Experimentation +5</li>
+            <li><strong>Sith Meditation Structure</strong> — Lightsaber Assembly +10, Experimentation +5</li>
+            <li><strong>VIP Bunker</strong> — Tailor Assembly +10, Experimentation +5, Repair +5</li>
+            <li><strong>Diner</strong> — Chef Assembly +10, Experimentation +5, Repair +5</li>
+            <li><strong>Vehicle Garage</strong> — Artisan Assembly +10, Experimentation +5</li>
+          </ul>
+
+          <div class="patch-notes-subtitle">
+            Thank you for playing on <strong>Bellum Gero</strong>. More updates and content are already in development.
+          </div>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCH: DECEMBER 9, 2025 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ December 9th, 2025</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            The galaxy continues to evolve! This update focuses on quality-of-life improvements,
+            combat adjustments, and new ways to earn loot across Bellum Gero.
+          </div>
+
+          <ol class="patch-notes-list">
+            <li>
+              <strong>1️⃣ New Ability — Waypoint Color Customization</strong><br />
+              Players can now change the color of existing waypoints using the command:
+              <code>/waypointcolor</code>.
+            </li>
+            <li>
+              <strong>2️⃣ Bounty Hunter Droid Improvements</strong><br />
+              All Bounty Hunter droids have been enhanced to be more effective in tracking and engagement.
+            </li>
+            <li>
+              <strong>3️⃣ Vendor Listing Name Fix (Possible)</strong><br />
+              A potential fix has been applied to resolve an issue with vendor listing names.
+            </li>
+            <li>
+              <strong>4️⃣ Bank Tipping Enhancements</strong><br />
+              💠 No confirmation pop-up is required when tipping through the bank—tips are always fee-free.<br />
+              💌 Cash tips now generate in-game email notifications for both the sender and receiver.
+            </li>
+            <li>
+              <strong>5️⃣ New Feature — Item Lock</strong><br />
+              You can now lock or unlock items in your inventory.
+            </li>
+            <li>
+              <strong>6️⃣ World Boss Auto-Loot System</strong><br />
+              World Bosses now drop reward items directly into the inventories of all eligible players within
+              32 meters who dealt damage.
+            </li>
+            <li>
+              <strong>7️⃣ Treasure Map Discovery from Sampling</strong><br />
+              Players who sample resources now have a small chance to discover a Treasure Map.
+            </li>
+            <li>
+              <strong>8️⃣ Heavy Weapon CA/AA Compatibility</strong><br />
+              Heavy Weapon CA/AA are now fully functional and contribute their intended stats.
+            </li>
+            <li>
+              <strong>9️⃣ Force Lightning Compatibility Fix (HLC)</strong><br />
+              Fixed compatibility for the Lightning Command when used with HLC setups.
+            </li>
+          </ol>
+
+          <div class="patch-notes-subtitle">
+            💠 Thank you for playing on Bellum Gero! More updates and content are on the way.
+          </div>
+
+          <hr class="patch-divider" />
+
+          <!-- PREVIOUS PATCH: DECEMBER 2, 2025 -->
+          <div class="patch-notes-header">
+            <div class="patch-notes-title-line">📢 Bellum Gero — Patch Notes</div>
+            <div class="patch-notes-date">🗓️ December 2th, 2025</div>
+          </div>
+
+          <div class="patch-notes-subtitle">
+            🐛 <strong>Bug Fixes &amp; Improvements</strong>
+          </div>
+
+          <ol class="patch-notes-list">
+            <li>
+              <strong>1️⃣ NS Cave &amp; BH Guild NPC Names Fixed</strong><br />
+              Corrected naming issues with the Nightsister Cave and the new Bounty Hunter Guild NPC.
+            </li>
+            <li>
+              <strong>2️⃣ Marine Backpack Radial Menu Restored</strong><br />
+              Fixed the Marine Backpack so it now shows normal movement options on the radial menu.
+            </li>
+            <li>
+              <strong>3️⃣ Schematics &amp; Deeds Rarity Roll Fix</strong><br />
+              Resolved an issue where schematics and deeds were incorrectly rolling with loot rarities.
+            </li>
+            <li>
+              <strong>4️⃣ Harvest Command While Peaceed</strong><br />
+              Fixed the create harvest command not functioning when the player was Peaceed.
+            </li>
+            <li>
+              <strong>5️⃣ Bounty Hunter Lightning Ability Updates</strong><br />
+              Added Lightning Ultimate ability for Bounty Hunters.<br />
+              Added Lightning Cannon to the Fire Knockdown ability.
+            </li>
+            <li>
+              <strong>6️⃣ Junk Dealer – Schematic Buyback Expansion</strong><br />
+              Junk Dealers now buy any schematic for 2,000 credits each, from main inventory or backpacks.<br />
+              <strong>Warning:</strong> Before using Sell All, make sure you do not have schematics you want to keep.
+            </li>
+            <li>
+              <strong>7️⃣ Padawan Trials Save Fix</strong><br />
+              Fixed an issue where Padawan Trial progress did not save after logging out.
+            </li>
+            <li>
+              <strong>8️⃣ Group XP Range Fix for Trials</strong><br />
+              Fixed Knight &amp; Padawan Trials granting XP in groups while out of range.<br />
+              XP now only applies when within 32 meters.
+            </li>
+          </ol>
+
+          <div class="patch-notes-subtitle" style="margin-top: 6px;">
+            ✨ <strong>New Feature</strong>
+          </div>
+
+          <ol class="patch-notes-list" start="9">
+            <li>
+              <strong>9️⃣ Apprenticeship XP Vendor Added</strong><br />
+              A new vendor now allows players to purchase Bellum Gero Tokens.<br />
+              Cost: <strong>500 Apprenticeship XP → 1 Bellum Gero Token</strong>.
+            </li>
+          </ol>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    Bellum Gero — Star Wars Galaxies Emulator Server<br />
+    Not affiliated with Lucasfilm, Disney, or Sony Online Entertainment.
+  </footer>
+
+  <!-- SERVER STATUS SCRIPT -->
+  <script>
+    async function updateServerStatus() {
+      const widget = document.getElementById("server-status-widget");
+      const text = document.getElementById("server-status-text");
+      const uptimeEl = document.getElementById("server-status-uptime");
+      const inlineStatus = document.getElementById("server-status");
+
+      if (!widget || !text || !uptimeEl) {
+        console.error("Server status elements not found in DOM");
+        return;
+      }
+
+      const url = window.location.origin + "/api/server-status";
+
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error("Bad HTTP status: " + res.status);
+
+        const data = await res.json();
+
+        if (data.online) {
+          widget.classList.remove("server-offline");
+          widget.classList.add("server-online");
+          text.textContent = "Online";
+
+          uptimeEl.textContent = data.uptime_human ? ("Uptime: " + data.uptime_human) : "Uptime: --";
+
+          if (inlineStatus) {
+            inlineStatus.textContent = "Online";
+            inlineStatus.style.color = "limegreen";
+          }
+        } else {
+          widget.classList.remove("server-online");
+          widget.classList.add("server-offline");
+          text.textContent = "Offline";
+          uptimeEl.textContent = "Uptime: --";
+
+          if (inlineStatus) {
+            inlineStatus.textContent = "Offline";
+            inlineStatus.style.color = "red";
+          }
+        }
+      } catch (err) {
+        console.error("Error checking server status:", err);
+        widget.classList.remove("server-online");
+        widget.classList.add("server-offline");
+        text.textContent = "Offline";
+        uptimeEl.textContent = "Uptime: --";
+
+        if (inlineStatus) {
+          inlineStatus.textContent = "Unknown";
+          inlineStatus.style.color = "orange";
+        }
+      }
+    }
+
+    // run immediately and every 30s
+    updateServerStatus();
+    setInterval(updateServerStatus, 30000);
+  </script>
+
+  <!-- Cloudflare Web Analytics (single include) -->
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    data-cf-beacon='{"version":"2024.11.0","token":"74a71d6ab42b4dd4841304736b09625b","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+    crossorigin="anonymous">
+  </script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"74a71d6ab42b4dd4841304736b09625b","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+```
