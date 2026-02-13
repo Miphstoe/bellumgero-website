@@ -55,6 +55,7 @@
   const profBtn = $("profBtn");
   const profMenu = $("profMenu");
   const buildStrip = $("buildStrip");
+  const downloadBtn = $("downloadBtn");
   const profTitle = $("profTitle");
   const resetBtn = $("resetBtn");
 
@@ -76,6 +77,7 @@
     ["profBtn", profBtn],
     ["profMenu", profMenu],
     ["buildStrip", buildStrip],
+    ["downloadBtn", downloadBtn],
     ["profTitle", profTitle],
     ["resetBtn", resetBtn],
     ["treesWrap", treesWrap],
@@ -204,6 +206,57 @@
     }
   }
 
+  function skillDisplayName(skillName) {
+    return SD?.skill_names?.[skillName] || skillName;
+  }
+
+  function buildTemplateText() {
+    const byProf = new Map();
+
+    for (const skillName of selected) {
+      const pk = skillToProfession.get(skillName) || "unknown";
+      if (!byProf.has(pk)) byProf.set(pk, []);
+      byProf.get(pk).push(skillName);
+    }
+
+    const lines = [];
+    lines.push("Bellum Gero Skill Template");
+    lines.push(`Generated: ${new Date().toISOString()}`);
+    lines.push(`Skill Points: ${calcSPUsed()}/${SP_CAP_DEFAULT}`);
+    lines.push(`Total Skills: ${selected.size}`);
+    lines.push("");
+
+    const profs = Array.from(byProf.keys()).sort((a, b) => a.localeCompare(b));
+    for (const pk of profs) {
+      const skills = byProf.get(pk).slice().sort((a, b) => a.localeCompare(b));
+      lines.push(`[${prettyProfName(pk)}]`);
+      for (const skillName of skills) {
+        lines.push(`- ${skillName} | ${skillDisplayName(skillName)}`);
+      }
+      lines.push("");
+    }
+
+    if (!profs.length) {
+      lines.push("No skills selected.");
+    }
+
+    return lines.join("\n");
+  }
+
+  function downloadTemplate() {
+    const text = buildTemplateText();
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    a.href = url;
+    a.download = `skill-template-${stamp}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
   profBtn.addEventListener("click", (e) => {
     e.preventDefault();
     toggleMenu();
@@ -330,8 +383,8 @@
     b.dataset.skill = skillName;
     b.textContent = label;
 
-    const enabled = canSelect(skillName);
-    b.disabled = !enabled;
+    // Allow direct selection of higher tiers; prerequisites are auto-selected.
+    b.disabled = false;
 
     if (selected.has(skillName)) b.classList.add("on");
 
@@ -429,7 +482,7 @@
       : null;
 
     // Master
-    masterBtn.disabled = !masterName || (!canSelect(masterName) && !selected.has(masterName));
+    masterBtn.disabled = !masterName;
     masterBtn.className = "skill skill-wide" + (masterName && selected.has(masterName) ? " on" : "");
     masterBtn.textContent = "Master";
     masterBtn.onclick = masterName
@@ -467,6 +520,10 @@
   resetBtn.addEventListener("click", () => {
     selected = new Set();
     render();
+  });
+
+  downloadBtn.addEventListener("click", () => {
+    downloadTemplate();
   });
 
   // ---------- Init ----------
