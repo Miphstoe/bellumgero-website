@@ -55,7 +55,7 @@
   };
 
   // Hide non-profession rank tracks from the profession dropdown.
-  const EXCLUDED_PROFESSION_KEYS = new Set(["force_rank_light", "force_rank_dark", "force_title_jedi"]);
+  const EXCLUDED_PROFESSION_KEYS = new Set(["force_rank_light", "force_rank_dark", "force_title_jedi", "pilot_imperial_navy", "pilot_neutral", "pilot_rebel_navy"]);
 
   // Keep these professions pinned at the top of the dropdown in this exact order.
   const STARTING_PROFESSION_ORDER = [
@@ -636,6 +636,7 @@
   // Optional debug: comment out if you don't want it always visible
   // dbg(`OK: Loaded professions=${profKeys.length}\nFirst=${profKeys[0]}`);
 })();
+
 
 
 
