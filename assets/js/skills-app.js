@@ -157,7 +157,16 @@
   }
 
   // ---------- State ----------
-  let currentProfKey = STARTING_PROFESSION_ORDER.find((k) => professions[k]) || profKeys[0];
+  function isVisibleProfessionKey(k) {
+    return !!professions[k] && !EXCLUDED_PROFESSION_KEYS.has(k);
+  }
+
+  const DEFAULT_VISIBLE_PROF_KEY =
+    STARTING_PROFESSION_ORDER.find((k) => isVisibleProfessionKey(k)) ||
+    profKeys.find((k) => isVisibleProfessionKey(k)) ||
+    profKeys[0];
+
+  let currentProfKey = DEFAULT_VISIBLE_PROF_KEY;
   let selected = new Set();
 
   // ---------- UI: Profession dropdown ----------
@@ -171,11 +180,11 @@
   }
 
   function menuProfessionKeys() {
-    const existingStart = STARTING_PROFESSION_ORDER.filter((k) => professions[k] && !EXCLUDED_PROFESSION_KEYS.has(k));
+    const existingStart = STARTING_PROFESSION_ORDER.filter((k) => isVisibleProfessionKey(k));
     const startSet = new Set(existingStart);
 
     const remainder = profKeys
-      .filter((k) => !startSet.has(k) && !EXCLUDED_PROFESSION_KEYS.has(k))
+      .filter((k) => !startSet.has(k) && isVisibleProfessionKey(k))
       .sort((a, b) =>
         prettyProfName(a).localeCompare(prettyProfName(b), undefined, { sensitivity: "base" })
       );
@@ -591,6 +600,10 @@
   }
 
   function render() {
+    if (!isVisibleProfessionKey(currentProfKey)) {
+      currentProfKey = DEFAULT_VISIBLE_PROF_KEY;
+    }
+
     const p = professions[currentProfKey];
     if (!p) {
       dbg(`ERROR: Current profession key not found: ${currentProfKey}`);
@@ -623,6 +636,7 @@
   // Optional debug: comment out if you don't want it always visible
   // dbg(`OK: Loaded professions=${profKeys.length}\nFirst=${profKeys[0]}`);
 })();
+
 
 
 
