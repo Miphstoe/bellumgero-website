@@ -322,6 +322,39 @@
     return Array.isArray(s?.skills_required) ? s.skills_required : [];
   }
 
+  function projectedSelectionWithPrereqs(skillName) {
+    const next = new Set(selected);
+    const stack = [skillName];
+
+    while (stack.length) {
+      const n = stack.pop();
+      const s = skillByName.get(n);
+      if (!s) continue;
+
+      const req = reqsFor(n);
+      for (const r of req) {
+        if (!next.has(r)) stack.push(r);
+      }
+      next.add(n);
+    }
+
+    return next;
+  }
+
+  function calcSPUsedFromSet(setRef) {
+    let total = 0;
+    for (const n of setRef) {
+      total += Number(skillByName.get(n)?.skillpoint_cost ?? 0);
+    }
+    return total;
+  }
+
+  function canSelectWithinCap(skillName) {
+    if (selected.has(skillName)) return true;
+    const projected = projectedSelectionWithPrereqs(skillName);
+    return calcSPUsedFromSet(projected) <= SP_CAP_DEFAULT;
+  }
+
   function canSelect(skillName) {
     if (selected.has(skillName)) return true;
     const req = reqsFor(skillName);
@@ -362,11 +395,7 @@
 
   // ---------- Calculations ----------
   function calcSPUsed() {
-    let total = 0;
-    for (const n of selected) {
-      total += Number(skillByName.get(n)?.skillpoint_cost ?? 0);
-    }
-    return total;
+    return calcSPUsedFromSet(selected);
   }
 
   function calcMods() {
@@ -433,8 +462,8 @@
     b.dataset.skill = skillName;
     b.textContent = label;
 
-    // Allow direct selection of higher tiers; prerequisites are auto-selected.
-    b.disabled = false;
+    // Block new picks that would exceed the skill point cap.
+    b.disabled = !selected.has(skillName) && !canSelectWithinCap(skillName);
 
     if (selected.has(skillName)) b.classList.add("on");
 
@@ -442,6 +471,7 @@
       if (selected.has(skillName)) {
         deselectCascade(skillName);
       } else {
+        if (!canSelectWithinCap(skillName)) return;
         selectWithPrereqs(skillName);
       }
       render();
@@ -520,25 +550,31 @@
     const masterName = p?.master?.name || null;
 
     // Novice
-    noviceBtn.disabled = !noviceName;
+    noviceBtn.disabled = !noviceName || (!selected.has(noviceName) && !canSelectWithinCap(noviceName));
     noviceBtn.className = "skill skill-wide" + (noviceName && selected.has(noviceName) ? " on" : "");
     noviceBtn.textContent = "Novice";
     noviceBtn.onclick = noviceName
       ? () => {
           if (selected.has(noviceName)) deselectCascade(noviceName);
-          else selectWithPrereqs(noviceName);
+          else {
+            if (!canSelectWithinCap(noviceName)) return;
+            selectWithPrereqs(noviceName);
+          }
           render();
         }
       : null;
 
     // Master
-    masterBtn.disabled = !masterName;
+    masterBtn.disabled = !masterName || (!selected.has(masterName) && !canSelectWithinCap(masterName));
     masterBtn.className = "skill skill-wide" + (masterName && selected.has(masterName) ? " on" : "");
     masterBtn.textContent = "Master";
     masterBtn.onclick = masterName
       ? () => {
           if (selected.has(masterName)) deselectCascade(masterName);
-          else selectWithPrereqs(masterName);
+          else {
+            if (!canSelectWithinCap(masterName)) return;
+            selectWithPrereqs(masterName);
+          }
           render();
         }
       : null;
