@@ -45,23 +45,13 @@
     combat_unarmed: "Tera Kasi Master",
     combat_2hsword: "Swordsman",
     combat_1hsword: "Fencer",
-    outdoors_bio_engineer: "Bio-Engineer",
+    outdoors_bio_engineer: "Bio Engineer",
     force_sensitive_crafting_mastery: "Crafting Mastery",
     force_sensitive_combat_prowess: "Combat Prowess",
     force_discipline_enhancements: "Enhancer",
     force_sensitive_enhanced_reflexes: "Enhanced Reflexes",
     force_sensitive_heightened_senses: "Enhanced Senses",
   };
-
-  // User-priority ordering for the profession dropdown.
-  // Note: "brawler" was listed twice; duplicates are ignored by design.
-  const STARTING_PROFESSION_ORDER = [
-    "combat_brawler",
-    "science_medic",
-    "combat_marksman",
-    "crafting_artisan",
-    "social_entertainer",
-  ];
 
   if (!profKeys.length) {
     dbg(
@@ -165,14 +155,9 @@
   }
 
   function menuProfessionKeys() {
-    const existingStart = STARTING_PROFESSION_ORDER.filter((k) => professions[k]);
-    const startSet = new Set(existingStart);
-
-    const remainder = profKeys
-      .filter((k) => !startSet.has(k))
-      .sort((a, b) => prettyProfName(a).localeCompare(prettyProfName(b)));
-
-    return [...existingStart, ...remainder];
+    return [...profKeys].sort((a, b) =>
+      prettyProfName(a).localeCompare(prettyProfName(b))
+    );
   }
 
   function openMenu() {
