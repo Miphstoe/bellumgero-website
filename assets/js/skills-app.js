@@ -53,6 +53,16 @@
     force_sensitive_heightened_senses: "Enhanced Senses",
   };
 
+  // Keep these professions pinned at the top of the dropdown in this exact order.
+  const STARTING_PROFESSION_ORDER = [
+    "crafting_artisan",    // Artisan
+    "combat_brawler",      // Brawler
+    "social_entertainer",  // Entertainer
+    "combat_marksman",     // Marksmen
+    "science_medic",       // Medic
+    "outdoors_scout",      // Scout
+  ];
+
   if (!profKeys.length) {
     dbg(
       "ERROR: Found skillsRoot, but it has 0 professions.\n" +
@@ -155,9 +165,14 @@
   }
 
   function menuProfessionKeys() {
-    return [...profKeys].sort((a, b) =>
-      prettyProfName(a).localeCompare(prettyProfName(b))
-    );
+    const existingStart = STARTING_PROFESSION_ORDER.filter((k) => professions[k]);
+    const startSet = new Set(existingStart);
+
+    const remainder = profKeys
+      .filter((k) => !startSet.has(k))
+      .sort((a, b) => prettyProfName(a).localeCompare(prettyProfName(b)));
+
+    return [...existingStart, ...remainder];
   }
 
   function openMenu() {
