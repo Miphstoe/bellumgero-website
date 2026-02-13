@@ -13,6 +13,7 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--text);}
 .page{max-width:1400px;margin:18px auto;padding:0 16px;}
+.page-title{margin:0 0 14px;font-size:clamp(28px,4vw,54px);line-height:1.08;letter-spacing:.6px;text-transform:uppercase;color:#f7ffff;text-shadow:0 2px 0 rgba(0,0,0,.25);}
 
 .topbar{display:flex;gap:12px;align-items:center;margin-bottom:14px;}
 .build-strip{display:flex;gap:8px;flex-wrap:wrap;min-height:42px;align-items:center}
@@ -32,6 +33,7 @@ body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--tex
 .btn:hover{background:var(--btn2)}
 .btn-reset{background:var(--danger);border-color:rgba(0,0,0,.25)}
 .btn-top{min-width:200px;text-align:left}
+.btn-home{display:inline-flex;align-items:center;text-decoration:none}
 
 .dropdown{position:relative}
 .menu{position:absolute;top:44px;left:0;background:#083a45;border:1px solid rgba(255,255,255,.25);border-radius:8px;min-width:260px;max-height:420px;overflow:auto;z-index:50}
@@ -98,3 +100,4 @@ body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--tex
 .modrow:last-child{border-bottom:0}
 
 .xpbody{min-height:60px;padding:10px}
+
