@@ -311,7 +311,8 @@
 
       const tree = Array.isArray(trees[col]) ? trees[col] : [];
 
-      for (let row = 0; row < 4; row++) {
+      // Data is stored novice->master (01..04); display should be master->novice.
+      for (let row = 3; row >= 0; row--) {
         const node = tree[row];
 
         if (!node?.name) {
