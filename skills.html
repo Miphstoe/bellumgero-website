@@ -1,60 +1,80 @@
-<meta charset="UTF-8" />
-<main class="page">
-  <div class="topbar">
-    <div class="dropdown">
-      <button id="profBtn" class="btn btn-top">Select Profession ▾</button>
-      <div id="profMenu" class="menu hidden"></div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skill Calculator</title>
+
+  <!-- IMPORTANT: load the stylesheet -->
+  <link rel="stylesheet" href="/assets/css/skills.css" />
+</head>
+
+<body>
+  <main class="page">
+    <div class="topbar">
+      <div class="dropdown">
+        <button id="profBtn" class="btn btn-top">
+          Select Profession <span aria-hidden="true">&#9662;</span>
+        </button>
+        <div id="profMenu" class="menu hidden"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="grid">
-    <!-- LEFT: Skill Tree -->
-    <section class="panel panel-main">
-      <div class="panel-header">
-        <h1 id="profTitle">—</h1>
-        <button id="resetBtn" class="btn btn-reset">Reset</button>
-      </div>
-
-      <div class="tree">
-        <button id="masterBtn" class="skill skill-wide" disabled>Master</button>
-
-        <div id="treesWrap" class="trees-wrap">
-          <!-- JS injects 4 columns here -->
+    <div class="grid">
+      <!-- LEFT: Skill Tree -->
+      <section class="panel panel-main">
+        <div class="panel-header">
+          <h1 id="profTitle">—</h1>
+          <button id="resetBtn" class="btn btn-reset">Reset</button>
         </div>
 
-        <button id="noviceBtn" class="skill skill-wide" disabled>Novice</button>
-      </div>
+        <div class="tree">
+          <button id="masterBtn" class="skill skill-wide" disabled>Master</button>
 
-      <div class="spbar">
-        <div class="sptext">
-          Skillpoints: <span id="spUsed">0</span>/<span id="spCap">250</span>
-        </div>
-        <div class="bar">
-          <div id="barFill" class="barfill" style="width:0%"></div>
-        </div>
-      </div>
-    </section>
+          <div id="treesWrap" class="trees-wrap">
+            <!-- JS injects 4 columns here -->
+          </div>
 
-    <!-- RIGHT: Skill Mods -->
-    <section class="panel panel-side">
-      <div class="panel-header">
-        <h2>Skill Mods</h2>
-      </div>
-      <div class="mods">
-        <div class="mods-header">
-          <div>Name</div>
-          <div>Value</div>
+          <button id="noviceBtn" class="skill skill-wide" disabled>Novice</button>
         </div>
-        <div id="modsBody" class="mods-body"></div>
-      </div>
-    </section>
 
-    <!-- BOTTOM: XP Required -->
-    <section class="panel panel-bottom">
-      <div class="panel-header">
-        <h2>Experience Required</h2>
-      </div>
-      <div id="xpBody" class="xpbody"></div>
-    </section>
-  </div>
-</main>
+        <div class="spbar">
+          <div class="sptext">
+            Skillpoints: <span id="spUsed">0</span>/<span id="spCap">250</span>
+          </div>
+          <div class="bar">
+            <div id="barFill" class="barfill" style="width:0%"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Skill Mods -->
+      <section class="panel panel-side">
+        <div class="panel-header">
+          <h2>Skill Mods</h2>
+        </div>
+        <div class="mods">
+          <div class="mods-header">
+            <div>Name</div>
+            <div>Value</div>
+          </div>
+          <div id="modsBody" class="mods-body"></div>
+        </div>
+      </section>
+
+      <!-- BOTTOM: XP Required -->
+      <section class="panel panel-bottom">
+        <div class="panel-header">
+          <h2>Experience Required</h2>
+        </div>
+        <div id="xpBody" class="xpbody"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Load data FIRST -->
+  <script src="/assets/js/skills-data.js"></script>
+  <!-- Then app -->
+  <script src="/assets/js/skills-app.js"></script>
+</body>
+</html>
