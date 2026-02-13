@@ -45,6 +45,7 @@
     combat_unarmed: "Tera Kasi Master",
     combat_2hsword: "Swordsman",
     combat_1hsword: "Fencer",
+    combat_polearm: "Pikeman",
     outdoors_bio_engineer: "Bio Engineer",
     force_sensitive_crafting_mastery: "Crafting Mastery",
     force_sensitive_combat_prowess: "Combat Prowess",
@@ -52,6 +53,9 @@
     force_sensitive_enhanced_reflexes: "Enhanced Reflexes",
     force_sensitive_heightened_senses: "Enhanced Senses",
   };
+
+  // Hide non-profession rank tracks from the profession dropdown.
+  const EXCLUDED_PROFESSION_KEYS = new Set(["force_rank_light", "force_rank_dark"]);
 
   // Keep these professions pinned at the top of the dropdown in this exact order.
   const STARTING_PROFESSION_ORDER = [
@@ -167,11 +171,11 @@
   }
 
   function menuProfessionKeys() {
-    const existingStart = STARTING_PROFESSION_ORDER.filter((k) => professions[k]);
+    const existingStart = STARTING_PROFESSION_ORDER.filter((k) => professions[k] && !EXCLUDED_PROFESSION_KEYS.has(k));
     const startSet = new Set(existingStart);
 
     const remainder = profKeys
-      .filter((k) => !startSet.has(k))
+      .filter((k) => !startSet.has(k) && !EXCLUDED_PROFESSION_KEYS.has(k))
       .sort((a, b) =>
         prettyProfName(a).localeCompare(prettyProfName(b), undefined, { sensitivity: "base" })
       );
@@ -619,3 +623,6 @@
   // Optional debug: comment out if you don't want it always visible
   // dbg(`OK: Loaded professions=${profKeys.length}\nFirst=${profKeys[0]}`);
 })();
+
+
+
