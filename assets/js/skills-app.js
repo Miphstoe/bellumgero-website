@@ -40,6 +40,27 @@
 
   const professions = skillsRoot;
   const profKeys = Object.keys(professions);
+  const PROF_DISPLAY_NAMES = {
+    combat_marksman: "Marksmen",
+    combat_unarmed: "Tera Kasi Master",
+    combat_2hsword: "Swordsman",
+    combat_1hsword: "Fencer",
+    force_sensitive_crafting_mastery: "Crafting Mastery",
+    force_sensitive_combat_prowess: "Combat Prowess",
+    force_discipline_enhancements: "Enhancer",
+    force_sensitive_enhanced_reflexes: "Enhanced Reflexes",
+    force_sensitive_heightened_senses: "Enhanced Senses",
+  };
+
+  // User-priority ordering for the profession dropdown.
+  // Note: "brawler" was listed twice; duplicates are ignored by design.
+  const STARTING_PROFESSION_ORDER = [
+    "combat_brawler",
+    "science_medic",
+    "combat_marksman",
+    "crafting_artisan",
+    "social_entertainer",
+  ];
 
   if (!profKeys.length) {
     dbg(
@@ -136,9 +157,21 @@
 
   // ---------- UI: Profession dropdown ----------
   function prettyProfName(key) {
+    if (PROF_DISPLAY_NAMES[key]) return PROF_DISPLAY_NAMES[key];
     // keys like: combat_marksman / crafting_armorsmith
     const last = String(key).split("_").pop() || String(key);
     return last.charAt(0).toUpperCase() + last.slice(1);
+  }
+
+  function menuProfessionKeys() {
+    const existingStart = STARTING_PROFESSION_ORDER.filter((k) => professions[k]);
+    const startSet = new Set(existingStart);
+
+    const remainder = profKeys
+      .filter((k) => !startSet.has(k))
+      .sort((a, b) => prettyProfName(a).localeCompare(prettyProfName(b)));
+
+    return [...existingStart, ...remainder];
   }
 
   function openMenu() {
@@ -156,7 +189,7 @@
   function buildMenu() {
     profMenu.innerHTML = "";
 
-    for (const pk of profKeys) {
+    for (const pk of menuProfessionKeys()) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = prettyProfName(pk);
@@ -178,7 +211,9 @@
       counts.set(pk, (counts.get(pk) || 0) + 1);
     }
 
-    return Array.from(counts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+    return Array.from(counts.entries()).sort((a, b) =>
+      prettyProfName(a[0]).localeCompare(prettyProfName(b[0]))
+    );
   }
 
   function renderBuildStrip() {
