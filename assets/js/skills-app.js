@@ -45,6 +45,7 @@
     combat_unarmed: "Tera Kasi Master",
     combat_2hsword: "Swordsman",
     combat_1hsword: "Fencer",
+    outdoors_bio_engineer: "Bio-Engineer",
     force_sensitive_crafting_mastery: "Crafting Mastery",
     force_sensitive_combat_prowess: "Combat Prowess",
     force_discipline_enhancements: "Enhancer",
