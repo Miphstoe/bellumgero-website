@@ -212,6 +212,7 @@
 
   function buildTemplateText() {
     const byProf = new Map();
+    const mods = calcMods();
 
     for (const skillName of selected) {
       const pk = skillToProfession.get(skillName) || "unknown";
@@ -224,6 +225,15 @@
     lines.push(`Generated: ${new Date().toISOString()}`);
     lines.push(`Skill Points: ${calcSPUsed()}/${SP_CAP_DEFAULT}`);
     lines.push(`Total Skills: ${selected.size}`);
+    lines.push("");
+    lines.push("[Skill Mods]");
+    if (mods.length) {
+      for (const [name, value] of mods) {
+        lines.push(`- ${name}: ${value}`);
+      }
+    } else {
+      lines.push("- none");
+    }
     lines.push("");
 
     const profs = Array.from(byProf.keys()).sort((a, b) => a.localeCompare(b));
