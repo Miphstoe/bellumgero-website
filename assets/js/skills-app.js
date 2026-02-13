@@ -153,15 +153,17 @@
   }
 
   // ---------- State ----------
-  let currentProfKey = profKeys[0];
+  let currentProfKey = STARTING_PROFESSION_ORDER.find((k) => professions[k]) || profKeys[0];
   let selected = new Set();
 
   // ---------- UI: Profession dropdown ----------
   function prettyProfName(key) {
     if (PROF_DISPLAY_NAMES[key]) return PROF_DISPLAY_NAMES[key];
-    // keys like: combat_marksman / crafting_armorsmith
-    const last = String(key).split("_").pop() || String(key);
-    return last.charAt(0).toUpperCase() + last.slice(1);
+    // Fallback: derive from profession name key, dropping category prefix.
+    const raw = String(key);
+    const parts = raw.split("_");
+    const base = parts.length > 1 ? parts.slice(1).join(" ") : raw;
+    return base.replace(/\b\w/g, (c) => c.toUpperCase());
   }
 
   function menuProfessionKeys() {
@@ -170,7 +172,9 @@
 
     const remainder = profKeys
       .filter((k) => !startSet.has(k))
-      .sort((a, b) => prettyProfName(a).localeCompare(prettyProfName(b)));
+      .sort((a, b) =>
+        prettyProfName(a).localeCompare(prettyProfName(b), undefined, { sensitivity: "base" })
+      );
 
     return [...existingStart, ...remainder];
   }
