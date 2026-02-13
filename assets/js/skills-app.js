@@ -54,6 +54,7 @@
 
   const profBtn = $("profBtn");
   const profMenu = $("profMenu");
+  const buildStrip = $("buildStrip");
   const profTitle = $("profTitle");
   const resetBtn = $("resetBtn");
 
@@ -74,6 +75,7 @@
   const required = [
     ["profBtn", profBtn],
     ["profMenu", profMenu],
+    ["buildStrip", buildStrip],
     ["profTitle", profTitle],
     ["resetBtn", resetBtn],
     ["treesWrap", treesWrap],
@@ -98,19 +100,29 @@
 
   // ---------- Build global index: skillName -> skillObject ----------
   const skillByName = new Map();
+  const skillToProfession = new Map();
 
   for (const pk of profKeys) {
     const p = professions[pk];
     if (!p) continue;
 
-    if (p?.novice?.name) skillByName.set(p.novice.name, p.novice);
-    if (p?.master?.name) skillByName.set(p.master.name, p.master);
+    if (p?.novice?.name) {
+      skillByName.set(p.novice.name, p.novice);
+      skillToProfession.set(p.novice.name, pk);
+    }
+    if (p?.master?.name) {
+      skillByName.set(p.master.name, p.master);
+      skillToProfession.set(p.master.name, pk);
+    }
 
     if (Array.isArray(p?.trees)) {
       for (const tree of p.trees) {
         if (!Array.isArray(tree)) continue;
         for (const node of tree) {
-          if (node?.name) skillByName.set(node.name, node);
+          if (node?.name) {
+            skillByName.set(node.name, node);
+            skillToProfession.set(node.name, pk);
+          }
         }
       }
     }
@@ -148,11 +160,47 @@
       btn.textContent = prettyProfName(pk);
       btn.addEventListener("click", () => {
         currentProfKey = pk;
-        selected = new Set(); // per-profession reset; change if you want multi-prof builds
         render();
         closeMenu();
       });
       profMenu.appendChild(btn);
+    }
+  }
+
+  function selectedProfessions() {
+    const counts = new Map();
+
+    for (const skillName of selected) {
+      const pk = skillToProfession.get(skillName);
+      if (!pk) continue;
+      counts.set(pk, (counts.get(pk) || 0) + 1);
+    }
+
+    return Array.from(counts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+  }
+
+  function renderBuildStrip() {
+    const profs = selectedProfessions();
+    buildStrip.innerHTML = "";
+
+    if (!profs.length) {
+      const empty = document.createElement("div");
+      empty.className = "build-empty";
+      empty.textContent = "Selected Build: none yet";
+      buildStrip.appendChild(empty);
+      return;
+    }
+
+    for (const [pk, count] of profs) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "build-chip" + (pk === currentProfKey ? " active" : "");
+      b.textContent = `${prettyProfName(pk)} (${count})`;
+      b.addEventListener("click", () => {
+        currentProfKey = pk;
+        render();
+      });
+      buildStrip.appendChild(b);
     }
   }
 
@@ -407,6 +455,7 @@
     }
 
     renderHeader();
+    renderBuildStrip();
     renderSPBar();
     renderNoviceMaster(p);
     renderTreesForProfession(p);

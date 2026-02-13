@@ -15,6 +15,19 @@ body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--tex
 .page{max-width:1400px;margin:18px auto;padding:0 16px;}
 
 .topbar{display:flex;gap:12px;align-items:center;margin-bottom:14px;}
+.build-strip{display:flex;gap:8px;flex-wrap:wrap;min-height:42px;align-items:center}
+.build-empty{opacity:.85;font-weight:700}
+.build-chip{
+  border:1px solid rgba(255,255,255,.25);
+  background:#0c4c58;
+  color:var(--text);
+  padding:8px 12px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:700;
+}
+.build-chip:hover{filter:brightness(1.08)}
+.build-chip.active{background:var(--btnOn);color:#08333b}
 .btn{border:1px solid rgba(255,255,255,.25);background:var(--btn);color:var(--text);padding:10px 14px;border-radius:6px;cursor:pointer}
 .btn:hover{background:var(--btn2)}
 .btn-reset{background:var(--danger);border-color:rgba(0,0,0,.25)}
