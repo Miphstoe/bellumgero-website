@@ -489,6 +489,17 @@
       }
     }
 
+    // Marksman labels should use explicit skill_names text.
+    if (
+      professionName === "combat_marksman" ||
+      String(name).includes("combat_marksman_")
+    ) {
+      const marksmanName = SD?.skill_names?.[name];
+      if (marksmanName) {
+        return String(marksmanName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Profession-specific branch labels where raw node names are ambiguous.
     if (professionName === "force_sensitive_enhanced_reflexes") {
       const branchByCol = ["Ranged Defense", "Melee Defense", "Vehicle Control", "Survival"];
