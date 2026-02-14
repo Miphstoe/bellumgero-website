@@ -455,6 +455,18 @@
   function labelFromSkillName(name, professionName = "", treeCol = -1) {
     const parts = String(name).split("_");
 
+    // Brawler uses richer names in skill_names (e.g. "Unarmed I: Street Fighting").
+    // Render them directly so branch labels match the intended tree names.
+    if (
+      professionName === "combat_brawler" ||
+      String(name).includes("combat_brawler_")
+    ) {
+      const brawlerName = SD?.skill_names?.[name];
+      if (brawlerName) {
+        return String(brawlerName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Profession-specific branch labels where raw node names are ambiguous.
     if (professionName === "force_sensitive_enhanced_reflexes") {
       const branchByCol = ["Ranged Defense", "Melee Defense", "Vehicle Control", "Survival"];

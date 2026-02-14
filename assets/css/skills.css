@@ -73,6 +73,8 @@ body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--tex
   color:var(--text);
   cursor:pointer;
   font-weight:700;
+  white-space:pre-line;
+  line-height:1.15;
 }
 .skill:hover{filter:brightness(1.05)}
 .skill[disabled]{opacity:.55;cursor:not-allowed}
