@@ -600,7 +600,7 @@
     // Novice
     noviceBtn.disabled = !noviceName || (!selected.has(noviceName) && !canSelectWithinCap(noviceName));
     noviceBtn.className = "skill skill-wide" + (noviceName && selected.has(noviceName) ? " on" : "");
-    noviceBtn.textContent = "Novice";
+    noviceBtn.textContent = noviceName ? skillDisplayName(noviceName) : "Novice";
     noviceBtn.onclick = noviceName
       ? () => {
           if (selected.has(noviceName)) deselectCascade(noviceName);
@@ -615,7 +615,7 @@
     // Master
     masterBtn.disabled = !masterName || (!selected.has(masterName) && !canSelectWithinCap(masterName));
     masterBtn.className = "skill skill-wide" + (masterName && selected.has(masterName) ? " on" : "");
-    masterBtn.textContent = "Master";
+    masterBtn.textContent = masterName ? skillDisplayName(masterName) : "Master";
     masterBtn.onclick = masterName
       ? () => {
           if (selected.has(masterName)) deselectCascade(masterName);

@@ -59,6 +59,7 @@
     force_discipline_enhancements: "Enhancer",
     force_sensitive_enhanced_reflexes: "Enhanced Reflexes",
     force_sensitive_heightened_senses: "Enhanced Senses",
+    force_discipline_healing: "Force Healing",
   };
 
   // Hide non-profession rank tracks from the profession dropdown.
@@ -464,6 +465,16 @@
         : "";
       if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
     }
+
+    if (professionName === "force_discipline_healing") {
+      const branchByCol = ["Force Rejuvenation", "Force Restoration", "Force Assist", "Force Purification"];
+      const fixed = branchByCol[treeCol];
+      const tier = Number(parts[parts.length - 1]);
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
+    }
     const last = parts[parts.length - 1];
     const num = Number(last);
 
@@ -589,7 +600,7 @@
     // Novice
     noviceBtn.disabled = !noviceName || (!selected.has(noviceName) && !canSelectWithinCap(noviceName));
     noviceBtn.className = "skill skill-wide" + (noviceName && selected.has(noviceName) ? " on" : "");
-    noviceBtn.textContent = "Novice";
+    noviceBtn.textContent = noviceName ? skillDisplayName(noviceName) : "Novice";
     noviceBtn.onclick = noviceName
       ? () => {
           if (selected.has(noviceName)) deselectCascade(noviceName);
@@ -604,7 +615,7 @@
     // Master
     masterBtn.disabled = !masterName || (!selected.has(masterName) && !canSelectWithinCap(masterName));
     masterBtn.className = "skill skill-wide" + (masterName && selected.has(masterName) ? " on" : "");
-    masterBtn.textContent = "Master";
+    masterBtn.textContent = masterName ? skillDisplayName(masterName) : "Master";
     masterBtn.onclick = masterName
       ? () => {
           if (selected.has(masterName)) deselectCascade(masterName);
