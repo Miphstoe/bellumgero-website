@@ -43,6 +43,7 @@
   const PROF_DISPLAY_NAMES = {
     combat_marksman: "Marksmen",
     combat_rifle: "Rifleman",
+    combat_rifleman: "Rifleman",
     combat_bountyhunter: "Bounty Hunter",
     bountyhunter: "Bounty Hunter",
     combat_unarmed: "Tera Kasi Master",
@@ -545,7 +546,9 @@
     // Rifleman keys are generic (accuracy/speed/ability/support), so map by column+tier.
     if (
       professionName === "combat_rifle" ||
-      String(name).includes("combat_rifle_")
+      professionName === "combat_rifleman" ||
+      String(name).includes("combat_rifle_") ||
+      String(name).includes("combat_rifleman_")
     ) {
       const tier = Number(parts[parts.length - 1]);
       const branchByCol = ["Sniping", "Concealment", "Counter-Sniping", "Rifle Abilities"];
@@ -768,7 +771,9 @@
 
     if (
       professionName === "combat_rifle" ||
-      String(name).includes("combat_rifle_")
+      professionName === "combat_rifleman" ||
+      String(name).includes("combat_rifle_") ||
+      String(name).includes("combat_rifleman_")
     ) {
       const riflemanName = SD?.skill_names?.[name];
       if (riflemanName) {
