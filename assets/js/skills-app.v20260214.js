@@ -592,6 +592,76 @@
       }
     }
 
+    if (
+      professionName === "crafting_chef" ||
+      String(name).includes("crafting_chef_")
+    ) {
+      const chefName = SD?.skill_names?.[name];
+      if (chefName) {
+        return String(chefName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "science_combatmedic" ||
+      String(name).includes("science_combatmedic_")
+    ) {
+      const combatMedicName = SD?.skill_names?.[name];
+      if (combatMedicName) {
+        return String(combatMedicName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_commando" ||
+      String(name).includes("combat_commando_")
+    ) {
+      const commandoName = SD?.skill_names?.[name];
+      if (commandoName) {
+        return String(commandoName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "outdoors_creaturehandler" ||
+      String(name).includes("outdoors_creaturehandler_")
+    ) {
+      const creatureHandlerName = SD?.skill_names?.[name];
+      if (creatureHandlerName) {
+        return String(creatureHandlerName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "social_dancer" ||
+      String(name).includes("social_dancer_")
+    ) {
+      const dancerName = SD?.skill_names?.[name];
+      if (dancerName) {
+        return String(dancerName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "science_doctor" ||
+      String(name).includes("science_doctor_")
+    ) {
+      const doctorName = SD?.skill_names?.[name];
+      if (doctorName) {
+        return String(doctorName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "crafting_droidengineer" ||
+      String(name).includes("crafting_droidengineer_")
+    ) {
+      const droidEngineerName = SD?.skill_names?.[name];
+      if (droidEngineerName) {
+        return String(droidEngineerName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Medic labels should use explicit skill_names text.
     if (
       professionName === "science_medic" ||
