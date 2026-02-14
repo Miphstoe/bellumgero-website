@@ -542,6 +542,29 @@
       }
     }
 
+    // Rifleman keys are generic (accuracy/speed/ability/support), so map by column+tier.
+    if (
+      professionName === "combat_rifle" ||
+      String(name).includes("combat_rifle_")
+    ) {
+      const tier = Number(parts[parts.length - 1]);
+      const branchByCol = ["Sniping", "Concealment", "Counter-Sniping", "Rifle Abilities"];
+      const subtitleByCol = [
+        ["", "Mind Shot 2", "Head Shot 3", "Surprise Shot", "Sniper Shot"],
+        ["", "Conceal Shot", "Cover Fighting", "Sneak and Shoot", "Silent Assassin"],
+        ["", "Flushing Shot", "Startling Shot", "Advanced Flushing Shot", "Advanced Startling Shot"],
+        ["", "Flurry Shot", "Defensive Firing", "Flurry Shot 2", "Fast Sniping"],
+      ];
+      const branch = branchByCol[treeCol];
+      const subtitle = Number.isFinite(tier) ? subtitleByCol[treeCol]?.[tier] : "";
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (branch && tierRoman) {
+        return subtitle ? `${branch} ${tierRoman}\n${subtitle}` : `${branch} ${tierRoman}`;
+      }
+    }
+
     // Additional profession labels should use explicit skill_names text.
     if (
       professionName === "crafting_architect" ||
