@@ -541,6 +541,57 @@
       }
     }
 
+    // Additional profession labels should use explicit skill_names text.
+    if (
+      professionName === "crafting_architect" ||
+      String(name).includes("crafting_architect_")
+    ) {
+      const architectName = SD?.skill_names?.[name];
+      if (architectName) {
+        return String(architectName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "crafting_armorsmith" ||
+      String(name).includes("crafting_armorsmith_")
+    ) {
+      const armorsmithName = SD?.skill_names?.[name];
+      if (armorsmithName) {
+        return String(armorsmithName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "outdoors_bio_engineer" ||
+      String(name).includes("outdoors_bio_engineer_")
+    ) {
+      const bioEngineerName = SD?.skill_names?.[name];
+      if (bioEngineerName) {
+        return String(bioEngineerName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_bountyhunter" ||
+      String(name).includes("combat_bountyhunter_")
+    ) {
+      const bountyHunterName = SD?.skill_names?.[name];
+      if (bountyHunterName) {
+        return String(bountyHunterName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_carbine" ||
+      String(name).includes("combat_carbine_")
+    ) {
+      const carbineerName = SD?.skill_names?.[name];
+      if (carbineerName) {
+        return String(carbineerName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Medic labels should use explicit skill_names text.
     if (
       professionName === "science_medic" ||
