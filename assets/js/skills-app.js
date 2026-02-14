@@ -466,7 +466,11 @@
       if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
     }
 
-    if (professionName === "force_discipline_healing") {
+    const isForceHealingNode =
+      professionName === "force_discipline_healing" ||
+      String(name).includes("force_discipline_healing_");
+
+    if (isForceHealingNode) {
       const branchByCol = ["Force Rejuvenation", "Force Restoration", "Force Assist", "Force Purification"];
       const fixed = branchByCol[treeCol];
       const tier = Number(parts[parts.length - 1]);
