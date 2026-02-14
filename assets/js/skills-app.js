@@ -662,6 +662,56 @@
       }
     }
 
+    if (
+      professionName === "combat_1hsword" ||
+      String(name).includes("combat_1hsword_")
+    ) {
+      const fencerName = SD?.skill_names?.[name];
+      if (fencerName) {
+        return String(fencerName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "social_imagedesigner" ||
+      String(name).includes("social_imagedesigner_")
+    ) {
+      const imageDesignerName = SD?.skill_names?.[name];
+      if (imageDesignerName) {
+        return String(imageDesignerName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "crafting_merchant" ||
+      String(name).includes("crafting_merchant_")
+    ) {
+      const merchantName = SD?.skill_names?.[name];
+      if (merchantName) {
+        return String(merchantName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "social_musician" ||
+      String(name).includes("social_musician_")
+    ) {
+      const musicianName = SD?.skill_names?.[name];
+      if (musicianName) {
+        return String(musicianName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_polearm" ||
+      String(name).includes("combat_polearm_")
+    ) {
+      const pikemanName = SD?.skill_names?.[name];
+      if (pikemanName) {
+        return String(pikemanName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Medic labels should use explicit skill_names text.
     if (
       professionName === "science_medic" ||
