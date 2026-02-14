@@ -47,6 +47,7 @@
     combat_2hsword: "Swordsman",
     combat_1hsword: "Fencer",
     combat_polearm: "Pikeman",
+    outdoors_creaturehandler: "Creature Handler",
     outdoors_bio_engineer: "Bio Engineer",
     crafting_droidengineer: "Droid Engineer",
     science_combatmedic: "Combat Medic",
