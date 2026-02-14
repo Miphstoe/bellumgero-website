@@ -772,6 +772,56 @@
       }
     }
 
+    if (
+      professionName === "outdoors_squadleader" ||
+      String(name).includes("outdoors_squadleader_")
+    ) {
+      const squadLeaderName = SD?.skill_names?.[name];
+      if (squadLeaderName) {
+        return String(squadLeaderName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_2hsword" ||
+      String(name).includes("combat_2hsword_")
+    ) {
+      const swordsmanName = SD?.skill_names?.[name];
+      if (swordsmanName) {
+        return String(swordsmanName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "crafting_tailor" ||
+      String(name).includes("crafting_tailor_")
+    ) {
+      const tailorName = SD?.skill_names?.[name];
+      if (tailorName) {
+        return String(tailorName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_unarmed" ||
+      String(name).includes("combat_unarmed_")
+    ) {
+      const teraKasiName = SD?.skill_names?.[name];
+      if (teraKasiName) {
+        return String(teraKasiName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "crafting_weaponsmith" ||
+      String(name).includes("crafting_weaponsmith_")
+    ) {
+      const weaponsmithName = SD?.skill_names?.[name];
+      if (weaponsmithName) {
+        return String(weaponsmithName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Medic labels should use explicit skill_names text.
     if (
       professionName === "science_medic" ||
