@@ -712,6 +712,66 @@
       }
     }
 
+    if (
+      professionName === "social_politician" ||
+      String(name).includes("social_politician_")
+    ) {
+      const politicianName = SD?.skill_names?.[name];
+      if (politicianName) {
+        return String(politicianName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_pistol" ||
+      String(name).includes("combat_pistol_")
+    ) {
+      const pistoleerName = SD?.skill_names?.[name];
+      if (pistoleerName) {
+        return String(pistoleerName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "outdoors_ranger" ||
+      String(name).includes("outdoors_ranger_")
+    ) {
+      const rangerName = SD?.skill_names?.[name];
+      if (rangerName) {
+        return String(rangerName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_rifle" ||
+      String(name).includes("combat_rifle_")
+    ) {
+      const riflemanName = SD?.skill_names?.[name];
+      if (riflemanName) {
+        return String(riflemanName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "crafting_shipwright" ||
+      String(name).includes("crafting_shipwright_")
+    ) {
+      const shipwrightName = SD?.skill_names?.[name];
+      if (shipwrightName) {
+        return String(shipwrightName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "combat_smuggler" ||
+      String(name).includes("combat_smuggler_")
+    ) {
+      const smugglerName = SD?.skill_names?.[name];
+      if (smugglerName) {
+        return String(smugglerName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Medic labels should use explicit skill_names text.
     if (
       professionName === "science_medic" ||
