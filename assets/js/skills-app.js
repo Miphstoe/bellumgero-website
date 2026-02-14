@@ -467,6 +467,17 @@
       }
     }
 
+    // Artisan also has explicit labels in skill_names (e.g. "Engineering I: Tinkering").
+    if (
+      professionName === "crafting_artisan" ||
+      String(name).includes("crafting_artisan_")
+    ) {
+      const artisanName = SD?.skill_names?.[name];
+      if (artisanName) {
+        return String(artisanName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Profession-specific branch labels where raw node names are ambiguous.
     if (professionName === "force_sensitive_enhanced_reflexes") {
       const branchByCol = ["Ranged Defense", "Melee Defense", "Vehicle Control", "Survival"];
