@@ -467,6 +467,12 @@
       ? "Pistols"
       : parts.includes("carbine")
       ? "Carbines"
+      : parts.includes("ranged") && parts.includes("defense")
+      ? "Ranged Defense"
+      : parts.includes("melee") && parts.includes("defense")
+      ? "Melee Defense"
+      : parts.includes("vehicle") && parts.includes("control")
+      ? "Vehicle Control"
       : parts.includes("support")
       ? "Ranged Support"
       : parts[parts.length - 2] || name;
@@ -643,6 +649,7 @@
   // Optional debug: comment out if you don't want it always visible
   // dbg(`OK: Loaded professions=${profKeys.length}\nFirst=${profKeys[0]}`);
 })();
+
 
 
 
