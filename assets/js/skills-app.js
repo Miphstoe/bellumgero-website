@@ -500,6 +500,47 @@
       }
     }
 
+    // Force-sensitive progression labels should use explicit skill_names text.
+    if (
+      professionName === "force_sensitive_combat_prowess" ||
+      String(name).includes("force_sensitive_combat_prowess_")
+    ) {
+      const prowessName = SD?.skill_names?.[name];
+      if (prowessName) {
+        return String(prowessName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "force_sensitive_crafting_mastery" ||
+      String(name).includes("force_sensitive_crafting_mastery_")
+    ) {
+      const craftingMasteryName = SD?.skill_names?.[name];
+      if (craftingMasteryName) {
+        return String(craftingMasteryName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "force_sensitive_enhanced_reflexes" ||
+      String(name).includes("force_sensitive_enhanced_reflexes_")
+    ) {
+      const enhancedReflexesName = SD?.skill_names?.[name];
+      if (enhancedReflexesName) {
+        return String(enhancedReflexesName).replace(/:\s*/, "\n");
+      }
+    }
+
+    if (
+      professionName === "force_sensitive_heightened_senses" ||
+      String(name).includes("force_sensitive_heightened_senses_")
+    ) {
+      const heightenedSensesName = SD?.skill_names?.[name];
+      if (heightenedSensesName) {
+        return String(heightenedSensesName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Medic labels should use explicit skill_names text.
     if (
       professionName === "science_medic" ||
