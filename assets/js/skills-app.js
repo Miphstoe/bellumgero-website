@@ -500,6 +500,28 @@
       }
     }
 
+    // Medic labels should use explicit skill_names text.
+    if (
+      professionName === "science_medic" ||
+      String(name).includes("science_medic_")
+    ) {
+      const medicName = SD?.skill_names?.[name];
+      if (medicName) {
+        return String(medicName).replace(/:\s*/, "\n");
+      }
+    }
+
+    // Scout labels should use explicit skill_names text.
+    if (
+      professionName === "outdoors_scout" ||
+      String(name).includes("outdoors_scout_")
+    ) {
+      const scoutName = SD?.skill_names?.[name];
+      if (scoutName) {
+        return String(scoutName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Profession-specific branch labels where raw node names are ambiguous.
     if (professionName === "force_sensitive_enhanced_reflexes") {
       const branchByCol = ["Ranged Defense", "Melee Defense", "Vehicle Control", "Survival"];
