@@ -59,6 +59,7 @@
     force_discipline_enhancements: "Enhancer",
     force_sensitive_enhanced_reflexes: "Enhanced Reflexes",
     force_sensitive_heightened_senses: "Enhanced Senses",
+    force_discipline_healing: "Force Healing",
   };
 
   // Hide non-profession rank tracks from the profession dropdown.
@@ -464,6 +465,16 @@
         : "";
       if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
     }
+
+    if (professionName === "force_discipline_healing") {
+      const branchByCol = ["Force Rejuvenation", "Force Restoration", "Force Assist", "Force Purification"];
+      const fixed = branchByCol[treeCol];
+      const tier = Number(parts[parts.length - 1]);
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
+    }
     const last = parts[parts.length - 1];
     const num = Number(last);
 
@@ -660,6 +671,7 @@
   // Optional debug: comment out if you don't want it always visible
   // dbg(`OK: Loaded professions=${profKeys.length}\nFirst=${profKeys[0]}`);
 })();
+
 
 
 
