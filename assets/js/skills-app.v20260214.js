@@ -58,7 +58,7 @@
     force_sensitive_combat_prowess: "Combat Prowess",
     force_discipline_enhancements: "Enhancer",
     force_sensitive_enhanced_reflexes: "Enhanced Reflexes",
-    force_sensitive_heightened_senses: "Enhanced Senses",
+    force_sensitive_heightened_senses: "Heightened Senses",
     force_discipline_healing: "Force Healing",
   };
 
