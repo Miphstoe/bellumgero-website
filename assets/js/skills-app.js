@@ -58,10 +58,13 @@
     social_imagedesigner: "Image Designer",
     force_sensitive_crafting_mastery: "Crafting Mastery",
     force_sensitive_combat_prowess: "Combat Prowess",
-    force_discipline_enhancements: "Enhancer",
+    force_discipline_defender: "Force Defender",
+    force_discipline_enhancements: "Force Enhancer",
     force_sensitive_enhanced_reflexes: "Enhanced Reflexes",
     force_sensitive_heightened_senses: "Heightened Senses",
     force_discipline_healing: "Force Healing",
+    force_discipline_light_saber: "Lightsaber",
+    force_discipline_powers: "Force Powers",
   };
 
   // Hide non-profession rank tracks from the profession dropdown.
@@ -897,6 +900,62 @@
         : "";
       if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
     }
+
+    const isForceDefenderNode =
+      professionName === "force_discipline_defender" ||
+      String(name).includes("force_discipline_defender_");
+
+    if (isForceDefenderNode) {
+      const branchByCol = ["Force Melee Defense", "Force Ranged Defense", "Force Defense", "Preternatural Defense"];
+      const fixed = branchByCol[treeCol];
+      const tier = Number(parts[parts.length - 1]);
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
+    }
+
+    const isForceEnhancerNode =
+      professionName === "force_discipline_enhancements" ||
+      String(name).includes("force_discipline_enhancements_");
+
+    if (isForceEnhancerNode) {
+      const branchByCol = ["Force Celerity", "Force Protection", "Force Resistance", "Force Synergy"];
+      const fixed = branchByCol[treeCol];
+      const tier = Number(parts[parts.length - 1]);
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
+    }
+
+    const isLightsaberNode =
+      professionName === "force_discipline_light_saber" ||
+      String(name).includes("force_discipline_light_saber_");
+
+    if (isLightsaberNode) {
+      const branchByCol = ["One-Handed Lightsaber", "Two-Handed Lightsaber", "Double-Bladed Lightsaber", "Lightsaber Technique"];
+      const fixed = branchByCol[treeCol];
+      const tier = Number(parts[parts.length - 1]);
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
+    }
+
+    const isForcePowersNode =
+      professionName === "force_discipline_powers" ||
+      String(name).includes("force_discipline_powers_");
+
+    if (isForcePowersNode) {
+      const branchByCol = ["Force Lightning", "Force Subjugate", "Force Diminish", "Psychokineses"];
+      const fixed = branchByCol[treeCol];
+      const tier = Number(parts[parts.length - 1]);
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
+    }
     const last = parts[parts.length - 1];
     const num = Number(last);
 
@@ -1093,7 +1152,6 @@
   // Optional debug: comment out if you don't want it always visible
   // dbg(`OK: Loaded professions=${profKeys.length}\nFirst=${profKeys[0]}`);
 })();
-
 
 
 
