@@ -42,6 +42,7 @@
   const profKeys = Object.keys(professions);
   const PROF_DISPLAY_NAMES = {
     combat_marksman: "Marksmen",
+    combat_bountyhunter: "Bounty Hunter",
     combat_unarmed: "Tera Kasi Master",
     combat_2hsword: "Swordsman",
     combat_1hsword: "Fencer",
