@@ -451,8 +451,19 @@
 
   // ---------- Labels ----------
   // Improve later by providing a mapping table for exact SWG names.
-  function labelFromSkillName(name) {
+  function labelFromSkillName(name, professionName = "", treeCol = -1) {
     const parts = String(name).split("_");
+
+    // Profession-specific branch labels where raw node names are ambiguous.
+    if (professionName === "force_sensitive_enhanced_reflexes") {
+      const branchByCol = ["Ranged Defense", "Melee Defense", "Vehicle Control", "Survival"];
+      const fixed = branchByCol[treeCol];
+      const tier = Number(parts[parts.length - 1]);
+      const tierRoman = Number.isFinite(tier)
+        ? (["", "I", "II", "III", "IV", "V"][tier] || String(tier))
+        : "";
+      if (fixed) return tierRoman ? `${fixed} ${tierRoman}` : fixed;
+    }
     const last = parts[parts.length - 1];
     const num = Number(last);
 
@@ -529,7 +540,7 @@
           continue;
         }
 
-        const label = labelFromSkillName(node.name);
+        const label = labelFromSkillName(node.name, p?.name, col);
         colDiv.appendChild(makeSkillButton(label, node.name));
       }
 
@@ -649,6 +660,7 @@
   // Optional debug: comment out if you don't want it always visible
   // dbg(`OK: Loaded professions=${profKeys.length}\nFirst=${profKeys[0]}`);
 })();
+
 
 
 
