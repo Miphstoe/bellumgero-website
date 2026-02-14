@@ -478,6 +478,17 @@
       }
     }
 
+    // Entertainer labels should use explicit skill_names text.
+    if (
+      professionName === "social_entertainer" ||
+      String(name).includes("social_entertainer_")
+    ) {
+      const entertainerName = SD?.skill_names?.[name];
+      if (entertainerName) {
+        return String(entertainerName).replace(/:\s*/, "\n");
+      }
+    }
+
     // Profession-specific branch labels where raw node names are ambiguous.
     if (professionName === "force_sensitive_enhanced_reflexes") {
       const branchByCol = ["Ranged Defense", "Melee Defense", "Vehicle Control", "Survival"];
