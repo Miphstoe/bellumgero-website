@@ -187,9 +187,12 @@ body::before{
 
 .site-footer small{
   display:block;
+  text-align:center;
   font-size:0.72rem;
   line-height:1.5;
   opacity:0.9;
+  max-width:980px;
+  margin:0.3rem auto 0;
 }
 
 @media (max-width:980px){
