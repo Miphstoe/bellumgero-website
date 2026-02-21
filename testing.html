@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bellum Gero | Testing Page</title>
+  <meta
+    name="description"
+    content="Bellum Gero testing page with a new dark-space and orange visual style."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&family=Orbitron:wght@600;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --space-0: #020712;
+      --space-1: #081b3b;
+      --space-2: #112c58;
+      --accent: #f28c1b;
+      --accent-soft: rgba(242, 140, 27, 0.18);
+      --text: #f1f6ff;
+      --muted: #a8bbd8;
+      --panel: rgba(7, 18, 41, 0.78);
+      --border: rgba(216, 231, 255, 0.18);
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Exo 2", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 14%, rgba(46, 89, 156, 0.35), transparent 42%),
+        radial-gradient(circle at 82% 16%, rgba(24, 62, 128, 0.34), transparent 38%),
+        radial-gradient(circle at 54% 88%, rgba(13, 39, 82, 0.3), transparent 43%),
+        var(--space-0);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(2px 2px at 14% 22%, rgba(216, 231, 255, 0.62), transparent),
+        radial-gradient(1.5px 1.5px at 71% 31%, rgba(216, 231, 255, 0.58), transparent),
+        radial-gradient(1.8px 1.8px at 54% 76%, rgba(216, 231, 255, 0.52), transparent),
+        radial-gradient(1.2px 1.2px at 25% 86%, rgba(216, 231, 255, 0.45), transparent);
+      z-index: -1;
+    }
+
+    .wrap {
+      width: min(1140px, 92vw);
+      margin: 0 auto;
+      padding: 26px 0 42px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .brand-main {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-size: 1.16rem;
+    }
+
+    .brand-sub {
+      text-transform: uppercase;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 11px;
+      background: rgba(4, 10, 24, 0.5);
+      transition: 0.16s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      border-color: rgba(242, 140, 27, 0.45);
+      background: var(--accent-soft);
+    }
+
+    .status-row {
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-size: 0.92rem;
+    }
+
+    .status-row strong {
+      color: var(--accent);
+    }
+
+    .hero {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(150deg, rgba(3, 11, 26, 0.86), var(--panel));
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .tagline {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      font-size: 0.77rem;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.75rem, 3.2vw, 2.4rem);
+      line-height: 1.18;
+      margin-bottom: 10px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.54;
+      margin-bottom: 14px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 9px 15px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      color: #161616;
+      background: linear-gradient(135deg, #f28c1b, #ffb55c);
+      box-shadow: 0 0 20px rgba(242, 140, 27, 0.35);
+    }
+
+    .btn-ghost {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(5, 12, 30, 0.6);
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      padding: 6px 10px;
+      background: rgba(8, 20, 44, 0.55);
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-family: "Orbitron", sans-serif;
+      color: var(--accent);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(7, 18, 40, 0.72);
+      padding: 14px;
+    }
+
+    .card h3 {
+      color: var(--text);
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.93rem;
+    }
+
+    .card ul {
+      padding-left: 17px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .patch {
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="brand-main">BELLUM GERO</div>
+        <div class="brand-sub">Star Wars Galaxies Classic+ Server</div>
+      </div>
+      <nav>
+        <a href="http://15.204.163.178/tre/BellumGero%20Launcher_0.1.0_x64-setup.exe">Play Now</a>
+        <a href="skills.html">Skill Calculator</a>
+        <a href="#features">Server Features</a>
+        <a href="#patch-notes">Patch Notes</a>
+        <a href="#community">Community</a>
+      </nav>
+    </header>
+
+    <div class="status-row">Server Status: <strong>Checking...</strong></div>
+
+    <main>
+      <section class="hero" id="play">
+        <div class="panel">
+          <div class="tagline">A Different Kind of Galaxy</div>
+          <h1>Welcome to <span>Bellum Gero</span></h1>
+          <p>
+            A Star Wars Galaxies server focused on fast progression, powerful tools for
+            builders and city mayors, and challenging endgame content.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="http://15.204.163.178/tre/BellumGero%20Launcher_0.1.0_x64-setup.exe">Play Now</a>
+            <a class="btn btn-ghost" href="https://discord.gg/jSsR2hQZGw" target="_blank" rel="noopener">Discord</a>
+            <a class="btn btn-ghost" href="https://www.facebook.com/groups/2255603491594451" target="_blank" rel="noopener">Facebook</a>
+            <a class="btn btn-ghost" href="https://twitter.com/BellumGeroSWG" target="_blank" rel="noopener">Twitter / X</a>
+            <a class="btn btn-ghost" href="https://www.paypal.com/paypalme/scottedwards1926" target="_blank" rel="noopener">Donate</a>
+          </div>
+          <div class="pill-row">
+            <span class="pill">10x XP</span>
+            <span class="pill">World Bosses</span>
+            <span class="pill">Builder-Friendly Housing</span>
+          </div>
+        </div>
+
+        <aside class="panel" id="community">
+          <h2>Join the Community</h2>
+          <div class="card" style="margin-bottom:10px;">
+            <h3>Community Links</h3>
+            <ul>
+              <li><a href="https://discord.gg/jSsR2hQZGw" target="_blank" rel="noopener">Discord Server</a></li>
+              <li><a href="https://www.facebook.com/groups/2255603491594451" target="_blank" rel="noopener">Facebook Group</a></li>
+              <li><a href="https://twitter.com/BellumGeroSWG" target="_blank" rel="noopener">@BellumGeroSWG</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Support the Server</h3>
+            <p>Donations help cover hosting costs and keep Bellum Gero online.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="features">
+        <h2>Server Features</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Upcoming Event</h3>
+            <p><strong>Battle for Woolamander Crossing</strong></p>
+            <p>Sunday, February 22, 2026 at 2:00 PM EST</p>
+            <p>Location: Woolamander Crossing, Yavin 4</p>
+          </article>
+
+          <article class="card">
+            <h3>Gameplay Changes</h3>
+            <ul>
+              <li>10x XP rates across all professions</li>
+              <li>10 max characters, 4 online at once</li>
+              <li>Custom branch unlock system</li>
+              <li>Improved repairs and reduced armor decay</li>
+              <li>Random world bosses and reworked endgame caves</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Professions</h3>
+            <ul>
+              <li>Enhanced Entertainer buff options</li>
+              <li>Extensive Jedi profession enhancements</li>
+              <li>Master Politician unlock for 50,000 credits</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="patch-notes">
+        <h2>Patch Notes</h2>
+        <article class="card patch">
+          <h3>Bellum Gero Patch Notes - February 17, 2026</h3>
+          <p>
+            New creature content was added to stabilize resource availability, utility
+            rewards were expanded, city decoration options were improved, and multiple
+            quality-of-life updates were delivered for Jedi progression and world encounters.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      Static test page version. If approved, this style can be migrated into your live homepage.
+    </footer>
+  </div>
+</body>
+</html>
