@@ -243,6 +243,64 @@
       padding-left: 12px;
     }
 
+    .contact-section {
+      margin-top: 10px;
+      margin-bottom: 18px;
+    }
+
+    .contact-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(7, 18, 40, 0.72);
+      padding: 14px;
+    }
+
+    .contact-card h2 {
+      margin: 0 0 10px;
+      font-family: "Orbitron", sans-serif;
+      color: var(--accent);
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+    }
+
+    .contact-note {
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-form label {
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(5, 12, 30, 0.6);
+      color: var(--text);
+      padding: 10px;
+      font-family: "Exo 2", "Segoe UI", sans-serif;
+      font-size: 0.94rem;
+    }
+
+    .contact-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .contact-form .btn {
+      justify-self: start;
+    }
+
     footer {
       text-align: center;
       color: var(--muted);
@@ -628,6 +686,30 @@
           </ul>
         </article>
       </section>
+
+      <section class="contact-section" id="contact">
+        <div class="contact-card">
+          <h2>Contact Us</h2>
+          <p class="contact-note">
+            Send us a message. This opens your email app and drafts a message to nyre74@gmail.com.
+          </p>
+          <form id="contactForm" class="contact-form">
+            <div>
+              <label for="contactReplyEmail">Return Email</label>
+              <input id="contactReplyEmail" name="replyEmail" type="email" required />
+            </div>
+            <div>
+              <label for="contactSubject">Subject</label>
+              <input id="contactSubject" name="subject" type="text" required />
+            </div>
+            <div>
+              <label for="contactBody">Message</label>
+              <textarea id="contactBody" name="body" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Open Email Draft</button>
+          </form>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -638,5 +720,24 @@
       </small>
     </footer>
   </div>
+  <script>
+    (function () {
+      const form = document.getElementById("contactForm");
+      if (!form) return;
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const replyEmail = document.getElementById("contactReplyEmail").value.trim();
+        const subject = document.getElementById("contactSubject").value.trim();
+        const body = document.getElementById("contactBody").value.trim();
+        const fullBody = "Return Email: " + replyEmail + "\n\n" + body;
+        const mailto = "mailto:nyre74@gmail.com?subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          encodeURIComponent(fullBody);
+        window.location.href = mailto;
+      });
+    })();
+  </script>
 </body>
 </html>
