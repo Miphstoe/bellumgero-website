@@ -269,36 +269,9 @@
       font-size: 0.9rem;
     }
 
-    .contact-form {
+    .contact-actions {
       display: grid;
       gap: 10px;
-    }
-
-    .contact-form label {
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(5, 12, 30, 0.6);
-      color: var(--text);
-      padding: 10px;
-      font-family: "Exo 2", "Segoe UI", sans-serif;
-      font-size: 0.94rem;
-    }
-
-    .contact-form textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .contact-form .btn {
-      justify-self: start;
     }
 
     footer {
@@ -691,23 +664,12 @@
         <div class="contact-card">
           <h2>Contact Us</h2>
           <p class="contact-note">
-            Send us a message. This opens your email app and drafts a message to nyre74@gmail.com.
+            Reach out directly by email, or join us on Discord.
           </p>
-          <form id="contactForm" class="contact-form">
-            <div>
-              <label for="contactReplyEmail">Return Email</label>
-              <input id="contactReplyEmail" name="replyEmail" type="email" required />
-            </div>
-            <div>
-              <label for="contactSubject">Subject</label>
-              <input id="contactSubject" name="subject" type="text" required />
-            </div>
-            <div>
-              <label for="contactBody">Message</label>
-              <textarea id="contactBody" name="body" required></textarea>
-            </div>
-            <button class="btn btn-primary" type="submit">Open Email Draft</button>
-          </form>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:nyre74@gmail.com">Email: nyre74@gmail.com</a>
+            <a class="btn btn-outline" href="https://discord.gg/R4dTDEtpAy" target="_blank" rel="noopener">Join Us on Discord</a>
+          </div>
         </div>
       </section>
     </main>
@@ -720,24 +682,5 @@
       </small>
     </footer>
   </div>
-  <script>
-    (function () {
-      const form = document.getElementById("contactForm");
-      if (!form) return;
-
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const replyEmail = document.getElementById("contactReplyEmail").value.trim();
-        const subject = document.getElementById("contactSubject").value.trim();
-        const body = document.getElementById("contactBody").value.trim();
-        const fullBody = "Return Email: " + replyEmail + "\n\n" + body;
-        const mailto = "mailto:nyre74@gmail.com?subject=" +
-          encodeURIComponent(subject) +
-          "&body=" +
-          encodeURIComponent(fullBody);
-        window.location.href = mailto;
-      });
-    })();
-  </script>
 </body>
 </html>
