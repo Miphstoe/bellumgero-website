@@ -408,37 +408,22 @@
 
           <article class="card">
             <h3>Upcoming Features</h3>
-            <p><strong>Patch Spoiler - A Mysterious Discovery...</strong></p>
+            <p><strong>The Ranger's Path</strong></p>
             <p>
-              Something strange has been discovered in the Outer Rim.
+              A new Scout and Ranger questline is coming soon to Bellum Gero. <strong>The Ranger's Path</strong>
+              sends players deep into the wild frontiers to track deadly predators, investigate missing scouts,
+              and defend settlers living beyond the safety of the major cities.
             </p>
             <p>
-              A reclusive scholar known as the <strong>Holocron Cartographer</strong> has recently appeared in
-              <strong>Bestine, Tatooine</strong>, claiming to have mapped several Force Anomalies scattered across
-              the galaxy. These anomalies are said to contain fragments of a long-lost holocron guarded by
-              powerful entities bound to the Force.
+              Each stage is built around survival and discovery, with dangerous creature ambushes,
+              wilderness objectives, and an escalating hunt that leads to a legendary beast.
+              Rangers who complete the full path will earn respect across the galaxy while proving
+              they can master both the hunt and the terrain.
             </p>
             <p>
-              Adventurers brave enough to investigate these sites will be sent across six dangerous worlds,
-              where ancient ruins and forgotten temples hide these mysterious disturbances.
-            </p>
-            <ul>
-              <li>Travel to anomaly sites across the galaxy</li>
-              <li>Survey ancient Force shrines</li>
-              <li>Defeat powerful guardians protecting holocron fragments</li>
-              <li>Recover lost knowledge from the past</li>
-            </ul>
-            <p>
-              Those who recover all fragments and return to the Cartographer may be rewarded with something
-              extremely valuable.
-            </p>
-            <p>
-              Rumor has it the fragments can be reconstructed into a <strong>Holocron of Destiny</strong>.
-            </p>
-            <p>
-              More details coming in the next patch notes.<br />
-              Stay tuned.<br />
-              <strong>- Bellum Gero Development Team</strong>
+              Final completion reward is guaranteed: <strong>25,000 credits</strong> and a
+              <strong>Creature Survey Tool</strong> (<code>object/tangible/survey_tool/survey_tool_creature.iff</code>).
+              More details will be revealed in upcoming patch notes.
             </p>
           </article>
         </div>
@@ -447,6 +432,98 @@
       <section class="section" id="patch-notes">
         <h2>Patch Notes</h2>
         <article class="card patch">
+          <h3>Bellum Gero Patch Notes - 03/10/2026</h3>
+          <p>
+            This patch includes account-wide structure lot sharing, Padawan Trial reductions,
+            player city fixes, new Ewok event updates, loot and DNA adjustments, Creature Survey
+            tool support, rare crafted bonuses, faster pet maturation, and new monstrous insect
+            hunting content across multiple planets.
+          </p>
+
+          <h3 style="margin-top:12px;">Major Systems</h3>
+          <ul>
+            <li>Added account-wide structure lot sharing across all characters on the same account, with a 100-lot account cap.</li>
+            <li>Updated structure placement, transfer, guild hall transfer, and structure lookup systems to use account-wide lot tracking.</li>
+            <li>Removed the starter Helper Droid auto-spawn based on player feedback.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Jedi Progression</h3>
+          <ul>
+            <li>Reduced Padawan Trial PvE requirements from 5,000 points per phase to 1,750 points per phase.</li>
+            <li>Fixed Padawan Trial group credit so players must be within 32 meters of a kill to receive progress.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">City and World Fixes</h3>
+          <ul>
+            <li>Fixed shuttle registration/loading issues for player cities.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Event Updates</h3>
+          <ul>
+            <li>Updated the scheduled event for March 15, 2026 to feature Giant Ewok tribe leaders attacking Ewokanda.</li>
+            <li>Added new Ewok event bosses: Graaku, Torga, and Nakku.</li>
+            <li>Updated Giant Ewok Warchief loot to include power crystals instead of weapon drops.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Loot and Boss Updates</h3>
+          <ul>
+            <li>Adjusted faction NPC loot group values to better match intended item rarity.</li>
+            <li>Reduced Radar Topography Screen drop weighting in faction loot tables.</li>
+            <li>Added custom names to Technical Console schematic loot items.</li>
+            <li>Added Nabahe and TraF to the named DJM boss pool.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Creature Survey System</h3>
+          <ul>
+            <li>Added a new Organic Survey Device / Creature Survey Tool for upcoming rewards.</li>
+            <li>Enabled Creature Survey tools to properly detect creature resources.</li>
+            <li>Set Creature Survey tool usage to rely on creature_knowledge, including range calculation and eligibility.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">DNA and Bio-Engineer</h3>
+          <ul>
+            <li>Updated DNA sampling so level 300+ creatures always drop VHQ DNA samples.</li>
+            <li>Lower-level DNA sample quality now remains tied to the player's DNA harvesting skill.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Crafting</h3>
+          <ul>
+            <li>Added a small rare chance for crafted clothing, jewelry, and armor to roll bonus stat mods.</li>
+            <li>Prevented those random crafted bonus mods from carrying over into factory-produced items.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Creature Handler</h3>
+          <ul>
+            <li>Reduced pet maturation time so pets now fully mature in 3 days.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">New Creature Content: Monstrous Insects</h3>
+          <ul>
+            <li>New monstrous insect creatures have been added across four planets as a source of Insect Meat and Scaley Hide for crafting.</li>
+            <li>All creature types are available for open-world hunting.</li>
+            <li>All appear as targets on Destroy Mission terminals.</li>
+            <li>All monstrous insects are aggressive and drop Insect Meat.</li>
+            <li>Beetle variants also drop Scaley Hide.</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Lok (CL 26-35)</h3>
+          <p><strong>Creatures:</strong> Monstrous Lok Mite, Monstrous Kubaza Beetle, Monstrous Giant Kubaza (Boss)</p>
+          <p><strong>Mission Targets:</strong> Monstrous Lok Mite Nest, Monstrous Kubaza Colony</p>
+
+          <h3 style="margin-top:12px;">Dantooine (CL 36-45)</h3>
+          <p><strong>Creatures:</strong> Monstrous Dantooine Mite, Monstrous Dantooine Beetle, Monstrous Giant Dantooine Mite (Boss)</p>
+          <p><strong>Mission Targets:</strong> Monstrous Dantooine Mite Nest, Monstrous Dantooine Beetle Mound</p>
+
+          <h3 style="margin-top:12px;">Tatooine (CL 42-50)</h3>
+          <p><strong>Creatures:</strong> Monstrous Mound Mite, Monstrous Death Kreetle, Monstrous Rockmite, Monstrous Sand Beetle, Monstrous Overkreetle (Boss)</p>
+          <p><strong>Mission Targets:</strong> Monstrous Kreetle Nest, Monstrous Rock Beetle Mound, Monstrous Sand Beetle Colony</p>
+
+          <h3 style="margin-top:12px;">Yavin IV (CL 46-50)</h3>
+          <p><strong>Creatures:</strong> Monstrous Tanc Mite Warrior, Monstrous Lurking Angler, Monstrous Mad Angler, Monstrous Giant Tanc Mite (Boss)</p>
+          <p><strong>Mission Targets:</strong> Monstrous Tanc Mite Colony, Monstrous Angler Nest, Monstrous Mad Angler Den</p>
+        </article>
+
+        <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - March 3, 2026</h3>
           <p>
             This update introduces faction troop recruitment for player cities, adds a new
