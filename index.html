@@ -243,6 +243,71 @@
       padding-left: 12px;
     }
 
+    .feature-spoiler {
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid rgba(242, 140, 27, 0.28);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(242, 140, 27, 0.08), transparent 34%),
+        linear-gradient(160deg, rgba(5, 12, 28, 0.95), rgba(10, 22, 48, 0.88));
+      box-shadow: 0 0 22px rgba(242, 140, 27, 0.08);
+    }
+
+    .feature-spoiler h3,
+    .feature-spoiler h4 {
+      margin: 0 0 10px;
+      color: var(--text);
+    }
+
+    .feature-spoiler p,
+    .feature-spoiler li,
+    .feature-spoiler span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.94rem;
+    }
+
+    .feature-spoiler ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .spoiler-block {
+      margin-top: 14px;
+    }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .tier-card {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(216, 231, 255, 0.14);
+      background: rgba(7, 18, 40, 0.72);
+    }
+
+    .tier-card strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .note-box {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      background: rgba(242, 140, 27, 0.1);
+      color: var(--text);
+    }
+
     .contact-section {
       margin-top: 10px;
       margin-bottom: 18px;
@@ -292,6 +357,7 @@
       .hero { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr; }
       header { flex-direction: column; align-items: flex-start; }
+      .tier-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -409,23 +475,67 @@
 
           <article class="card">
             <h3>Upcoming Features</h3>
-            <p><strong>The Ranger's Path</strong></p>
-            <p>
-              A new Scout and Ranger questline is coming soon to Bellum Gero. <strong>The Ranger's Path</strong>
-              sends players deep into the wild frontiers to track deadly predators, investigate missing scouts,
-              and defend settlers living beyond the safety of the major cities.
-            </p>
-            <p>
-              Each stage is built around survival and discovery, with dangerous creature ambushes,
-              wilderness objectives, and an escalating hunt that leads to a legendary beast.
-              Rangers who complete the full path will earn respect across the galaxy while proving
-              they can master both the hunt and the terrain.
-            </p>
-            <p>
-              Final completion reward is guaranteed: <strong>25,000 credits</strong> and a
-              <strong>Creature Survey Tool</strong> (<code>object/tangible/survey_tool/survey_tool_creature.iff</code>).
-              More details will be revealed in upcoming patch notes.
-            </p>
+            <div class="feature-spoiler">
+              <h3>🌌 Galaxy Combat Board</h3>
+              <p>
+                A new contract system has arrived. Take on hunting assignments across the galaxy,
+                eliminate your targets, and earn rewards.
+              </p>
+
+              <div class="spoiler-block">
+                <h4>Features</h4>
+                <ul>
+                  <li>Choose from 5 contract tiers based on difficulty</li>
+                  <li>Receive randomized target assignments</li>
+                  <li>Hunt specific enemy factions across different planets</li>
+                  <li>Track your progress in real time</li>
+                  <li>Return to complete contracts and receive credits</li>
+                </ul>
+              </div>
+
+              <div class="spoiler-block">
+                <h4>Tier Breakdown</h4>
+                <div class="tier-grid">
+                  <div class="tier-card">
+                    <strong>Tier 1</strong>
+                    <span>50 kills - 25,000 credits</span>
+                  </div>
+                  <div class="tier-card">
+                    <strong>Tier 2</strong>
+                    <span>35 kills - 35,000 credits</span>
+                  </div>
+                  <div class="tier-card">
+                    <strong>Tier 3</strong>
+                    <span>30 kills - 45,000 credits</span>
+                  </div>
+                  <div class="tier-card">
+                    <strong>Tier 4</strong>
+                    <span>20 kills - 75,000 credits</span>
+                  </div>
+                  <div class="tier-card">
+                    <strong>Tier 5</strong>
+                    <span>10 kills - 150,000 credits</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="spoiler-block">
+                <h4>Example Targets</h4>
+                <ul>
+                  <li>Meatlumps (Corellia)</li>
+                  <li>Valarians (Tatooine)</li>
+                  <li>Tusken Raiders (Tatooine)</li>
+                  <li>Nightsisters (Dathomir)</li>
+                  <li>Rancors (Dathomir)</li>
+                  <li>Krayt Dragons (Tatooine)</li>
+                </ul>
+              </div>
+
+              <div class="note-box">
+                Only one contract can be active at a time. Return to the terminal to complete
+                your assignment and claim your reward.
+              </div>
+            </div>
           </article>
         </div>
       </section>
