@@ -498,6 +498,25 @@
       color: var(--text);
     }
 
+    .updates-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .updates-column {
+      min-width: 0;
+    }
+
+    .updates-column h2 {
+      font-family: "Orbitron", sans-serif;
+      color: var(--accent);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
     .contact-section {
       margin-top: 10px;
       margin-bottom: 18px;
@@ -552,6 +571,7 @@
       .event-poster { min-height: 320px; border-right: 0; border-bottom: 1px solid rgba(216, 231, 255, 0.12); }
       .event-content { padding: 0 18px 20px; }
       .event-meta { grid-template-columns: 1fr; }
+      .updates-layout { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -700,61 +720,66 @@
             </ul>
           </article>
 
-          <article class="card">
-            <h3>Upcoming Features</h3>
-            <div class="feature-spoiler">
-              <h3>🌌 Galactic Beastmaster Trial</h3>
-              <p>
-                A new Creature Handler challenge has been introduced to Bellum Gero.
-              </p>
-              <p>
-                Players can begin the Galactic Beastmaster Trial by speaking with Jorvik Tal in
-                Theed, Naboo. This quest challenges players to travel across the galaxy and tame
-                one baby creature from each of the following planets: Corellia, Naboo, Rori,
-                Talus, Endor, Tatooine, Lok, Dantooine, Dathomir, and Yavin 4.
-              </p>
-
-              <div class="spoiler-block">
-                <h4>Rules</h4>
-                <ul>
-                  <li>Players must personally tame each creature.</li>
-                  <li>Traded pets do not count.</li>
-                  <li>Previously owned pets do not count.</li>
-                  <li>Bio-Engineered pets do not count.</li>
-                  <li>Only baby creatures qualify.</li>
-                </ul>
-              </div>
-
-              <div class="spoiler-block">
-                <h4>Rewards</h4>
-                <ul>
-                  <li>150,000 Credits</li>
-                  <li>Holocron of Destiny</li>
-                </ul>
-              </div>
-
-              <div class="spoiler-block">
-                <h4>Additional Info</h4>
-                <ul>
-                  <li>Each successful tame provides a unique planetary bonding message and progresses the trial.</li>
-                  <li>The quest is repeatable every 168 hours (7 days).</li>
-                  <li>Progress is tracked automatically.</li>
-                  <li>Designed specifically for Creature Handlers to encourage exploration and mastery of taming mechanics.</li>
-                </ul>
-              </div>
-
-              <div class="note-box">
-                Prove your dominance over the galaxy&rsquo;s wildlife and earn your place among the
-                elite Beastmasters of Bellum Gero.
-              </div>
-            </div>
-          </article>
         </div>
       </section>
 
-      <section class="section" id="patch-notes">
-        <h2>Patch Notes</h2>
-        <article class="card patch">
+      <section class="section">
+        <div class="updates-layout">
+          <div class="updates-column">
+            <h2>Upcoming Features</h2>
+            <article class="card">
+              <div class="feature-spoiler" style="margin-top:0;">
+                <h3>🌌 Galactic Beastmaster Trial</h3>
+                <p>
+                  A new Creature Handler challenge has been introduced to Bellum Gero.
+                </p>
+                <p>
+                  Players can begin the Galactic Beastmaster Trial by speaking with Jorvik Tal in
+                  Theed, Naboo. This quest challenges players to travel across the galaxy and tame
+                  one baby creature from each of the following planets: Corellia, Naboo, Rori,
+                  Talus, Endor, Tatooine, Lok, Dantooine, Dathomir, and Yavin 4.
+                </p>
+
+                <div class="spoiler-block">
+                  <h4>Rules</h4>
+                  <ul>
+                    <li>Players must personally tame each creature.</li>
+                    <li>Traded pets do not count.</li>
+                    <li>Previously owned pets do not count.</li>
+                    <li>Bio-Engineered pets do not count.</li>
+                    <li>Only baby creatures qualify.</li>
+                  </ul>
+                </div>
+
+                <div class="spoiler-block">
+                  <h4>Rewards</h4>
+                  <ul>
+                    <li>150,000 Credits</li>
+                    <li>Holocron of Destiny</li>
+                  </ul>
+                </div>
+
+                <div class="spoiler-block">
+                  <h4>Additional Info</h4>
+                  <ul>
+                    <li>Each successful tame provides a unique planetary bonding message and progresses the trial.</li>
+                    <li>The quest is repeatable every 168 hours (7 days).</li>
+                    <li>Progress is tracked automatically.</li>
+                    <li>Designed specifically for Creature Handlers to encourage exploration and mastery of taming mechanics.</li>
+                  </ul>
+                </div>
+
+                <div class="note-box">
+                  Prove your dominance over the galaxy&rsquo;s wildlife and earn your place among the
+                  elite Beastmasters of Bellum Gero.
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <section class="updates-column" id="patch-notes">
+            <h2>Patch Notes</h2>
+            <article class="card patch">
           <h3>Bellum Gero Patch Notes - March 24, 2026</h3>
           <p>
             This patch fixes incorrect Organic Survey Tool use, increases house storage, updates
@@ -797,7 +822,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes &ndash; 03/17/2026</h3>
           <p>
             Added new Ranger and Bio-Engineer questlines, adjusted Fire Spider timers, removed
@@ -829,7 +854,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - 03/10/2026</h3>
           <p>
             This patch includes account-wide structure lot sharing, Padawan Trial reductions,
@@ -935,7 +960,7 @@
           <p><strong>Mission Targets:</strong> Monstrous Tanc Mite Colony, Monstrous Angler Nest, Monstrous Mad Angler Den</p>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - March 3, 2026</h3>
           <p>
             This update introduces faction troop recruitment for player cities, adds a new
@@ -989,7 +1014,7 @@
           </p>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - February 24, 2026</h3>
           <p>
             This update delivers community-requested PvP adjustments, expands Ranger utility,
@@ -1012,7 +1037,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - February 17, 2026</h3>
           <p>
             New creature content was added to stabilize resource availability, utility
@@ -1043,7 +1068,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - February 10, 2026</h3>
           <p>
             This publish introduced new world content, Creature Handler upgrades, Jedi
@@ -1066,7 +1091,7 @@
           <p><strong>Client Update Required:</strong> TRE update included. Close clients and run Full Scan.</p>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - February 3, 2026</h3>
           <p>
             Focused on mission reward tuning, new services/NPC utilities, and unlock
@@ -1084,7 +1109,7 @@
           <p><strong>Client Update Required:</strong> TRE update included. Close clients and run Full Scan.</p>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - January 30, 2026</h3>
           <p>
             Expanded Blue Shadow Virus rewards, adjusted PvP-only Jedi vs. Bounty Hunter
@@ -1102,7 +1127,7 @@
           <p><strong>Client Update Required:</strong> TRE update included. Close clients and run Full Scan.</p>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - January 27, 2026</h3>
           <p>
             Added the custom Village branch unlock flow, expanded loot tables, and
@@ -1119,7 +1144,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Hot Fix Notes - January 23, 2026</h3>
           <p>
             Added new Endor mission content, refined high-end loot quality, and applied
@@ -1132,7 +1157,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Hot Fix Notes - January 22, 2026</h3>
           <p>
             Focused on world boss timings, hub fixes, and additional crash mitigation.
@@ -1146,7 +1171,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - January 20, 2026</h3>
           <p>
             Reintroduced House Pack-Up with safeguards, expanded Junk Dealer behavior,
@@ -1163,7 +1188,7 @@
           <p><strong>Client Update Required:</strong> TRE update included. Close clients and run Full Scan.</p>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - January 16, 2026</h3>
           <p>
             Added milestone broadcasting and delivered multiple progression and vendor fixes.
@@ -1177,7 +1202,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - January 13, 2026</h3>
           <p>
             Introduced city advertising and resolved visibility and listing issues.
@@ -1190,7 +1215,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - January 8, 2026</h3>
           <p>
             Added new display/QoL features and fixed eligibility and city-hall issues.
@@ -1206,7 +1231,7 @@
           <p><strong>Client Update Notice:</strong> No TRE update required.</p>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - December 23, 2025</h3>
           <p>
             Expanded entertainer options, decorative customization, and FRS PvE progression.
@@ -1219,7 +1244,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - December 9, 2025</h3>
           <p>
             Quality-of-life and combat support update with loot and progression improvements.
@@ -1234,7 +1259,7 @@
           </ul>
         </article>
 
-        <article class="card patch" style="margin-top:12px;">
+            <article class="card patch" style="margin-top:12px;">
           <h3>Bellum Gero Patch Notes - December 2, 2025</h3>
           <p>
             Bug-fix heavy release with early progression and economy improvements.
@@ -1250,7 +1275,9 @@
             <li>Fixed out-of-range group XP for Knight/Padawan Trials (now 32m range).</li>
             <li>Added Apprenticeship XP vendor: <strong>500 XP = 1 Bellum Gero Token</strong>.</li>
           </ul>
-        </article>
+            </article>
+          </section>
+        </div>
       </section>
 
       <section class="contact-section" id="contact">
