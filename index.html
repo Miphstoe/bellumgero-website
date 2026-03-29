@@ -841,7 +841,7 @@
 
           <section class="updates-column" id="patch-notes">
             <h2>Patch Notes</h2>
-            <details class="card patch patch-note">
+            <details class="card patch patch-note" open>
               <summary>March 24, 2026</summary>
               <div class="patch-body">
                 <p>
@@ -1398,14 +1398,20 @@
       document.addEventListener("DOMContentLoaded", function () {
         var patchNotes = document.querySelectorAll(".patch-note");
 
-        patchNotes.forEach(function (note) {
-          note.removeAttribute("open");
+        patchNotes.forEach(function (note, index) {
+          var shouldStartOpen = index === 0;
+
+          if (shouldStartOpen) {
+            note.setAttribute("open", "");
+          } else {
+            note.removeAttribute("open");
+          }
 
           var summary = note.querySelector("summary");
           if (!summary) return;
 
           summary.setAttribute("role", "button");
-          summary.setAttribute("aria-expanded", "false");
+          summary.setAttribute("aria-expanded", shouldStartOpen ? "true" : "false");
 
           summary.addEventListener("click", function (event) {
             event.preventDefault();
