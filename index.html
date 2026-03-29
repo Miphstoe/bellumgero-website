@@ -517,6 +517,68 @@
       letter-spacing: 0.04em;
     }
 
+    .patch-note {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .patch-note summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      color: var(--text);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .patch-note summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .patch-note summary:hover {
+      background: rgba(242, 140, 27, 0.08);
+      color: #ffd38f;
+    }
+
+    .patch-note summary::after {
+      content: "+";
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(242, 140, 27, 0.3);
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.05rem;
+      line-height: 1;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    }
+
+    .patch-note[open] summary::after {
+      content: "-";
+    }
+
+    .patch-note[open] summary {
+      border-bottom: 1px solid rgba(216, 231, 255, 0.12);
+      background: rgba(242, 140, 27, 0.06);
+    }
+
+    .patch-body {
+      padding: 16px 18px 18px;
+    }
+
+    .patch-body > :first-child {
+      margin-top: 0;
+    }
+
     .contact-section {
       margin-top: 10px;
       margin-bottom: 18px;
