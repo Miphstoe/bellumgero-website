@@ -434,14 +434,84 @@
     }
 
     .feature-spoiler {
+      position: relative;
+      isolation: isolate;
       margin-top: 16px;
       padding: 18px;
       border: 1px solid rgba(242, 140, 27, 0.28);
       border-radius: 16px;
       background:
-        radial-gradient(circle at top right, rgba(242, 140, 27, 0.08), transparent 34%),
+        radial-gradient(circle at top right, rgba(242, 140, 27, 0.16), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(93, 163, 255, 0.12), transparent 30%),
         linear-gradient(160deg, rgba(5, 12, 28, 0.95), rgba(10, 22, 48, 0.88));
-      box-shadow: 0 0 22px rgba(242, 140, 27, 0.08);
+      box-shadow:
+        0 0 22px rgba(242, 140, 27, 0.08),
+        0 0 42px rgba(242, 140, 27, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+      animation: spoilerFloat 5.8s ease-in-out infinite;
+    }
+
+    .feature-spoiler::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(120deg, rgba(255, 211, 143, 0.85), rgba(242, 140, 27, 0.18), rgba(103, 177, 255, 0.5));
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .feature-spoiler::after {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -45%;
+      width: 52%;
+      height: 170%;
+      background: linear-gradient(90deg, transparent, rgba(255, 220, 170, 0.18), transparent);
+      transform: rotate(14deg);
+      pointer-events: none;
+      animation: spoilerSweep 4.8s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .feature-spoiler > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-spoiler-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 6px 11px;
+      border: 1px solid rgba(255, 201, 126, 0.42);
+      border-radius: 999px;
+      background: rgba(9, 18, 39, 0.76);
+      color: #ffd38f;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      box-shadow: 0 0 18px rgba(242, 140, 27, 0.14);
+    }
+
+    .feature-spoiler-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ffb55c;
+      box-shadow: 0 0 12px rgba(242, 140, 27, 0.8);
+      animation: beaconPulse 1.8s ease-in-out infinite;
     }
 
     .feature-spoiler h3,
@@ -458,6 +528,13 @@
       font-size: 0.94rem;
     }
 
+    .feature-spoiler h3 {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.25rem, 2vw, 1.55rem);
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 20px rgba(242, 140, 27, 0.18);
+    }
+
     .feature-spoiler ul {
       margin: 0;
       padding-left: 18px;
@@ -467,6 +544,11 @@
 
     .spoiler-block {
       margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(216, 231, 255, 0.08);
+      border-radius: 12px;
+      background: rgba(9, 20, 44, 0.45);
+      backdrop-filter: blur(4px);
     }
 
     .tier-grid {
@@ -496,6 +578,44 @@
       border-radius: 10px;
       background: rgba(242, 140, 27, 0.1);
       color: var(--text);
+      box-shadow: inset 0 0 0 1px rgba(255, 214, 165, 0.08);
+    }
+
+    @keyframes spoilerFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes spoilerSweep {
+      0% {
+        transform: translateX(0) rotate(14deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      55% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateX(310%) rotate(14deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes beaconPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.35);
+        opacity: 1;
+      }
     }
 
     .updates-layout {
@@ -644,6 +764,14 @@
       .event-content { padding: 0 18px 20px; }
       .event-meta { grid-template-columns: 1fr; }
       .updates-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .feature-spoiler,
+      .feature-spoiler::after,
+      .feature-spoiler-label::before {
+        animation: none;
+      }
     }
   </style>
 </head>
@@ -798,9 +926,10 @@
       <section class="section">
         <div class="updates-layout">
           <div class="updates-column">
-            <h2>Quest Spoiler</h2>
+            <h2>Upcoming Feature</h2>
             <article class="card">
               <div class="feature-spoiler" style="margin-top:0;">
+                <div class="feature-spoiler-label">Incoming Transmission</div>
                 <h3>Galactic Relief Effort</h3>
                 <p>
                   A call for aid echoes across the galaxy.
