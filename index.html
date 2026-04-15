@@ -596,6 +596,443 @@
       box-shadow: inset 0 0 0 1px rgba(255, 214, 165, 0.08);
     }
 
+    .mando-feature {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      border-color: rgba(242, 140, 27, 0.24);
+      background:
+        radial-gradient(circle at top right, rgba(242, 140, 27, 0.12), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(91, 143, 255, 0.1), transparent 34%),
+        linear-gradient(160deg, rgba(3, 10, 24, 0.96), rgba(6, 18, 38, 0.94));
+      box-shadow:
+        0 0 30px rgba(242, 140, 27, 0.08),
+        0 20px 45px rgba(0, 0, 0, 0.42);
+    }
+
+    .mando-feature::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 210, 141, 0.08), transparent 16%),
+        radial-gradient(circle at 82% 78%, rgba(255, 210, 141, 0.06), transparent 22%);
+      opacity: 0.9;
+    }
+
+    .mando-feature-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .mando-hero {
+      position: relative;
+      padding: 24px;
+      border: 1px solid rgba(255, 196, 112, 0.16);
+      border-radius: 18px;
+      background:
+        linear-gradient(130deg, rgba(255, 196, 112, 0.08), transparent 38%),
+        linear-gradient(160deg, rgba(8, 19, 41, 0.94), rgba(5, 13, 29, 0.92));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      animation: mandoFadeUp 0.7s ease both;
+    }
+
+    .mando-coming-tag {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 112, 0.3);
+      background: rgba(8, 18, 37, 0.82);
+      color: #ffd38f;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(242, 140, 27, 0.14);
+    }
+
+    .mando-coming-tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ffb55c;
+      box-shadow: 0 0 12px rgba(242, 140, 27, 0.7);
+    }
+
+    .mando-subtitle {
+      margin-bottom: 12px;
+      color: #ffd38f;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .mando-title {
+      margin: 0 0 12px;
+      max-width: 14ch;
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      text-transform: uppercase;
+      text-shadow: 0 0 24px rgba(242, 140, 27, 0.2);
+    }
+
+    .mando-title span {
+      color: var(--accent);
+    }
+
+    .mando-lead {
+      max-width: 60ch;
+      color: #d7e3f6;
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
+
+    .mando-quote {
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      border-radius: 14px;
+      background: rgba(19, 31, 54, 0.86);
+      box-shadow: inset 0 0 0 1px rgba(255, 214, 165, 0.08);
+      animation: mandoFadeUp 0.8s ease both;
+    }
+
+    .mando-quote p {
+      color: #ffdeaf;
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+
+    .mando-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(242, 140, 27, 0.55), transparent);
+    }
+
+    .mando-section {
+      display: grid;
+      gap: 14px;
+      padding-top: 2px;
+      animation: mandoFadeUp 0.85s ease both;
+    }
+
+    .mando-section-title {
+      margin: 0;
+      color: var(--accent);
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.02rem;
+      letter-spacing: 0.08em;
+    }
+
+    .mando-section-copy {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.95rem;
+    }
+
+    .mando-section-copy strong {
+      color: #ffd7a2;
+    }
+
+    .mando-copy-panels {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mando-copy-panel,
+    .mando-step,
+    .mando-planet,
+    .mando-reward-card,
+    .mando-rank,
+    .mando-note-card {
+      border: 1px solid rgba(216, 231, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(9, 20, 44, 0.56);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .mando-copy-panel:hover,
+    .mando-step:hover,
+    .mando-planet:hover,
+    .mando-reward-card:hover,
+    .mando-rank:hover,
+    .mando-note-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(242, 140, 27, 0.34);
+      box-shadow: 0 0 24px rgba(242, 140, 27, 0.12);
+    }
+
+    .mando-copy-panel {
+      padding: 14px 15px;
+    }
+
+    .mando-copy-panel h4,
+    .mando-reward-card h4,
+    .mando-note-card h4 {
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 0.94rem;
+    }
+
+    .mando-copy-panel p,
+    .mando-reward-card p,
+    .mando-note-card p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.92rem;
+    }
+
+    .mando-steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mando-step {
+      position: relative;
+      padding: 16px 16px 16px 56px;
+    }
+
+    .mando-step:nth-child(5) {
+      grid-column: 1 / -1;
+    }
+
+    .mando-step-marker {
+      position: absolute;
+      left: 16px;
+      top: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 112, 0.4);
+      background: rgba(242, 140, 27, 0.12);
+      color: #ffd38f;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.78rem;
+      box-shadow: 0 0 16px rgba(242, 140, 27, 0.15);
+    }
+
+    .mando-step-label {
+      margin-bottom: 4px;
+      color: #ffd38f;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .mando-step h4,
+    .mando-planet h4,
+    .mando-rank h4 {
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .mando-step p,
+    .mando-planet p,
+    .mando-rank p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.92rem;
+    }
+
+    .mando-planets {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mando-planet {
+      padding: 15px;
+    }
+
+    .mando-planet-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .mando-status {
+      flex-shrink: 0;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 231, 255, 0.14);
+      background: rgba(4, 12, 28, 0.72);
+      color: #d6e5fb;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mando-status-start {
+      border-color: rgba(255, 196, 112, 0.4);
+      color: #ffd38f;
+      background: rgba(242, 140, 27, 0.12);
+    }
+
+    .mando-status-progress {
+      border-color: rgba(127, 185, 255, 0.34);
+      color: #d9edff;
+      background: rgba(127, 185, 255, 0.12);
+    }
+
+    .mando-status-locked {
+      border-color: rgba(216, 231, 255, 0.12);
+      color: #a8bbd8;
+      background: rgba(8, 17, 38, 0.86);
+    }
+
+    .mando-status-complete {
+      border-color: rgba(123, 208, 144, 0.32);
+      color: #d4f5da;
+      background: rgba(67, 143, 90, 0.14);
+    }
+
+    .mando-void-tip {
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(127, 185, 255, 0.22);
+      background:
+        linear-gradient(145deg, rgba(127, 185, 255, 0.12), rgba(127, 185, 255, 0.03)),
+        rgba(5, 15, 33, 0.9);
+      box-shadow: 0 0 24px rgba(127, 185, 255, 0.08);
+    }
+
+    .mando-void-tip h4 {
+      margin-bottom: 6px;
+      color: #dcecff;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mando-void-tip p {
+      color: #c7d9f0;
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .mando-reward-card {
+      padding: 18px 18px 18px 20px;
+      border-left: 4px solid var(--accent);
+      background:
+        linear-gradient(135deg, rgba(242, 140, 27, 0.12), rgba(242, 140, 27, 0.03)),
+        rgba(9, 20, 44, 0.64);
+    }
+
+    .mando-reward-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: #ffd38f;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .mando-reward-card h4 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mando-ranks {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      padding-left: 18px;
+    }
+
+    .mando-ranks::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(242, 140, 27, 0.8), rgba(127, 185, 255, 0.24));
+    }
+
+    .mando-rank {
+      position: relative;
+      padding: 15px 16px 15px 22px;
+    }
+
+    .mando-rank::before {
+      content: "";
+      position: absolute;
+      left: -16px;
+      top: 22px;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: #ffb55c;
+      box-shadow: 0 0 14px rgba(242, 140, 27, 0.45);
+    }
+
+    .mando-rank-label {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: #ffd38f;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .mando-notes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mando-note-card {
+      padding: 15px 16px;
+    }
+
+    .mando-finale {
+      padding: 24px 18px 10px;
+      text-align: center;
+      animation: mandoFadeUp 1s ease both;
+    }
+
+    .mando-finale h3 {
+      margin-bottom: 8px;
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.45rem, 2.6vw, 2rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffd38f;
+      text-shadow: 0 0 24px rgba(242, 140, 27, 0.18);
+    }
+
+    .mando-finale p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      letter-spacing: 0.04em;
+    }
+
     @keyframes spoilerFloat {
       0%, 100% {
         transform: translateY(0);
@@ -619,6 +1056,17 @@
       100% {
         transform: translateX(310%) rotate(14deg);
         opacity: 0;
+      }
+    }
+
+    @keyframes mandoFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
@@ -779,12 +1227,26 @@
       .event-content { padding: 0 18px 20px; }
       .event-meta { grid-template-columns: 1fr; }
       .updates-layout { grid-template-columns: 1fr; }
+      .mando-copy-panels,
+      .mando-steps,
+      .mando-planets,
+      .mando-notes {
+        grid-template-columns: 1fr;
+      }
+
+      .mando-step:nth-child(5) {
+        grid-column: auto;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .feature-spoiler,
       .feature-spoiler::after,
-      .feature-spoiler-label::before {
+      .feature-spoiler-label::before,
+      .mando-hero,
+      .mando-quote,
+      .mando-section,
+      .mando-finale {
         animation: none;
       }
     }
@@ -943,50 +1405,283 @@
         <div class="updates-layout">
           <div class="updates-column">
             <h2>Coming Soon to Bellum Gero</h2>
-            <article class="card">
-              <div class="feature-spoiler" style="margin-top:0;">
-                <div class="feature-spoiler-label">Incoming Transmission</div>
-                <h3>Galactic Underworld Run</h3>
-                <p>
-                  Something is moving quietly through the spacelanes of Bellum Gero...
-                </p>
-                <p>
-                  A new Smuggler profession questline is on the way, giving underworld runners
-                  the chance to transport sealed illegal data between shady contacts across the
-                  galaxy. Dangerous routes, risky deliveries, and profit for those willing to
-                  keep their heads down are all part of the job.
-                </p>
+            <article class="card mando-feature">
+              <div class="mando-feature-inner">
+                <section class="mando-hero" aria-labelledby="mando-feature-title">
+                  <div class="mando-coming-tag">Coming Soon</div>
+                  <div class="mando-subtitle">Mandalorian Way of Life</div>
+                  <h3 class="mando-title" id="mando-feature-title">The Hunt <span>Begins.</span></h3>
+                  <p class="mando-lead">
+                    A galaxy-wide Bounty Hunter progression path is coming to Bellum Gero, built around honor,
+                    beskar, and the hard proof that only combat can provide. Each contract pushes you deeper into
+                    the creed, where reputation is earned world by world and every victory carries weight.
+                  </p>
+                </section>
 
-                <div class="spoiler-block">
-                  <h4>Underworld Routes</h4>
-                  <ul>
-                    <li>Carry sealed illegal data between discreet contacts scattered across the galaxy.</li>
-                    <li>Each run will send Smugglers through dangerous routes where staying unnoticed matters.</li>
-                    <li>Risk and reward go hand in hand for crews willing to fly under the radar.</li>
-                  </ul>
-                </div>
+                <aside class="mando-quote">
+                  <p>"Mando'ade daras drikar..."</p>
+                </aside>
 
-                <div class="spoiler-block">
-                  <h4>Profession Focus</h4>
-                  <ul>
-                    <li>Designed specifically for the Smuggler profession and built around repeatable underworld work.</li>
-                    <li>Take on risky delivery contracts, make the drop, and move on before the heat catches up.</li>
-                    <li>Fast reads, clean jobs, and steady pressure are all part of the experience.</li>
-                  </ul>
-                </div>
+                <div class="mando-divider"></div>
 
-                <div class="spoiler-block">
-                  <h4>More to Come</h4>
-                  <ul>
-                    <li>Galactic Underworld Run is bringing new repeatable Smuggler content to Bellum Gero.</li>
-                    <li>More details will be revealed when the feature goes live.</li>
-                    <li>Keep your cargo sealed and your profile low.</li>
-                  </ul>
-                </div>
+                <section class="mando-section" aria-labelledby="mando-what-is-this">
+                  <h3 class="mando-section-title" id="mando-what-is-this">01 &mdash; WHAT IS THIS</h3>
+                  <p class="mando-section-copy">
+                    The Mandalorian Way of Life is a <strong>parallel progression system</strong> built for
+                    <strong>Bounty Hunters</strong> who want a deeper path beyond the standard profession climb.
+                    There are <strong>no guilds, no shortcuts, and no borrowed prestige</strong>. Instead, hunters
+                    move through a <strong>10-world hunt system</strong>, completing each chapter to prove they belong
+                    on the road toward Mandalorian status.
+                  </p>
+                  <div class="mando-copy-panels">
+                    <div class="mando-copy-panel">
+                      <h4>Parallel Progression</h4>
+                      <p>Advance beside your profession path with a dedicated identity-driven journey built around the hunt.</p>
+                    </div>
+                    <div class="mando-copy-panel">
+                      <h4>Earned Status</h4>
+                      <p>Every chapter is personal. Progress comes from completed hunts and discipline, not social shortcuts.</p>
+                    </div>
+                  </div>
+                </section>
 
-                <div class="note-box">
-                  More details will be revealed when Galactic Underworld Run goes live.
-                </div>
+                <div class="mando-divider"></div>
+
+                <section class="mando-section" aria-labelledby="mando-how-begin">
+                  <h3 class="mando-section-title" id="mando-how-begin">02 &mdash; HOW YOU WILL BEGIN</h3>
+                  <p class="mando-section-copy">
+                    There is <strong>no registration required</strong>. Travel to <strong>Tatooine</strong>, enter the
+                    <strong>Mos Eisley cantina district</strong>, and seek out the <strong>Mandalorian Recruiter</strong>.
+                    From the moment you engage, the system begins tracking your progress automatically and the first leg
+                    of the hunt comes online.
+                  </p>
+                  <div class="mando-copy-panels">
+                    <div class="mando-copy-panel">
+                      <h4>No Ceremony Needed</h4>
+                      <p>Show up ready to work. The path opens through action, not paperwork.</p>
+                    </div>
+                    <div class="mando-copy-panel">
+                      <h4>Automatic Tracking</h4>
+                      <p>Once you begin, your hunt progression follows you across the galaxy without extra setup.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <div class="mando-divider"></div>
+
+                <section class="mando-section" aria-labelledby="mando-mission-loop">
+                  <h3 class="mando-section-title" id="mando-mission-loop">03 &mdash; THE MISSION LOOP</h3>
+                  <div class="mando-steps">
+                    <article class="mando-step">
+                      <div class="mando-step-marker">1</div>
+                      <div class="mando-step-label">Step 1</div>
+                      <h4>Find the Informant</h4>
+                      <p>Track down the local contact tied to your current world and get the hunt underway.</p>
+                    </article>
+                    <article class="mando-step">
+                      <div class="mando-step-marker">2</div>
+                      <div class="mando-step-label">Step 2</div>
+                      <h4>Accept the Quota</h4>
+                      <p>Take the assigned target count and prepare for the pace that world demands.</p>
+                    </article>
+                    <article class="mando-step">
+                      <div class="mando-step-marker">3</div>
+                      <div class="mando-step-label">Step 3</div>
+                      <h4>Fill the Quota</h4>
+                      <p>Work the terrain, handle resistance, and complete the quota through direct field action.</p>
+                    </article>
+                    <article class="mando-step">
+                      <div class="mando-step-marker">4</div>
+                      <div class="mando-step-label">Step 4</div>
+                      <h4>Report Back</h4>
+                      <p>Return to the informant, confirm completion, and claim the right to continue onward.</p>
+                    </article>
+                    <article class="mando-step">
+                      <div class="mando-step-marker">5</div>
+                      <div class="mando-step-label">Step 5</div>
+                      <h4>Move On</h4>
+                      <p>Advance to the next world and begin the next chapter of the proving path.</p>
+                    </article>
+                  </div>
+                </section>
+
+                <div class="mando-divider"></div>
+
+                <section class="mando-section" aria-labelledby="mando-worlds">
+                  <h3 class="mando-section-title" id="mando-worlds">04 &mdash; THE TEN HUNT WORLDS</h3>
+                  <div class="mando-planets">
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Tatooine</h4>
+                        <span class="mando-status mando-status-start">Start Here</span>
+                      </div>
+                      <p>The opening proving ground where recruits first answer the call in the sands of Mos Eisley.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Corellia</h4>
+                        <span class="mando-status mando-status-progress">In Progress</span>
+                      </div>
+                      <p>Urban routes and sharper resistance push hunters to stay fast, clean, and precise.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Naboo</h4>
+                        <span class="mando-status mando-status-locked">Locked</span>
+                      </div>
+                      <p>Refined worlds still hide dangerous work for those trusted to keep moving forward.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Dantooine</h4>
+                        <span class="mando-status mando-status-complete">Completed</span>
+                      </div>
+                      <p>Wide-open terrain rewards patient hunters who know how to control space and timing.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Lok</h4>
+                        <span class="mando-status mando-status-locked">Locked</span>
+                      </div>
+                      <p>Hostile ground and brutal encounters test whether your gear is worthy of the creed.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Rori</h4>
+                        <span class="mando-status mando-status-locked">Locked</span>
+                      </div>
+                      <p>Dense routes and layered threats demand awareness beyond the next shot.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Talus</h4>
+                        <span class="mando-status mando-status-locked">Locked</span>
+                      </div>
+                      <p>Operational discipline matters here, where hesitation can cost a full mission cycle.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Endor</h4>
+                        <span class="mando-status mando-status-locked">Locked</span>
+                      </div>
+                      <p>Unforgiving brush and hidden approach paths turn every pursuit into a calculated hunt.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Dathomir</h4>
+                        <span class="mando-status mando-status-locked">Locked</span>
+                      </div>
+                      <p>Only hardened hunters keep their footing where the world itself seems to push back.</p>
+                    </article>
+                    <article class="mando-planet">
+                      <div class="mando-planet-top">
+                        <h4>Yavin IV</h4>
+                        <span class="mando-status mando-status-locked">Locked</span>
+                      </div>
+                      <p>The final chapter waits in ancient territory where completion becomes identity.</p>
+                    </article>
+                  </div>
+                  <aside class="mando-void-tip">
+                    <h4>Void Tip</h4>
+                    <p>
+                      Informants are private per player, so there is no competition for your objective chain.
+                      If one is lost or disrupted, it will respawn and your route remains intact.
+                    </p>
+                  </aside>
+                </section>
+
+                <div class="mando-divider"></div>
+
+                <section class="mando-section" aria-labelledby="mando-earn">
+                  <h3 class="mando-section-title" id="mando-earn">05 &mdash; WHAT YOU EARN</h3>
+                  <p class="mando-section-copy">
+                    Completion of all ten worlds awards the <strong>Foundling Mandalorian Helmet</strong>, a visible
+                    symbol that the journey was finished the hard way. It marks the first true step into Mandalorian
+                    identity and tells the galaxy you did not arrive there by accident.
+                  </p>
+                  <article class="mando-reward-card">
+                    <div class="mando-reward-tag">Featured Reward</div>
+                    <h4>Foundling</h4>
+                    <p>Earn the Foundling Mandalorian Helmet after completing all 10 hunt worlds and claiming your place on the path.</p>
+                  </article>
+                </section>
+
+                <div class="mando-divider"></div>
+
+                <section class="mando-section" aria-labelledby="mando-ranks">
+                  <h3 class="mando-section-title" id="mando-ranks">06 &mdash; THE ADVENTUROUS PROGRESSION</h3>
+                  <div class="mando-ranks">
+                    <article class="mando-rank">
+                      <div class="mando-rank-label">Rank 1</div>
+                      <h4>Foundling</h4>
+                      <p>The first mark of belonging, earned through completion rather than invitation.</p>
+                    </article>
+                    <article class="mando-rank">
+                      <div class="mando-rank-label">Rank 2</div>
+                      <h4>Initiate</h4>
+                      <p>The creed begins to shape how you move, fight, and carry your name.</p>
+                    </article>
+                    <article class="mando-rank">
+                      <div class="mando-rank-label">Rank 3</div>
+                      <h4>Hunter</h4>
+                      <p>Your work speaks for itself, and the field starts to answer to your reputation.</p>
+                    </article>
+                    <article class="mando-rank">
+                      <div class="mando-rank-label">Rank 4</div>
+                      <h4>Verd'ika</h4>
+                      <p>You are no longer learning the hunt. You are becoming part of its tradition.</p>
+                    </article>
+                    <article class="mando-rank">
+                      <div class="mando-rank-label">Rank 5</div>
+                      <h4>Clanbound</h4>
+                      <p>Duty deepens, and your actions carry the weight of something larger than yourself.</p>
+                    </article>
+                    <article class="mando-rank">
+                      <div class="mando-rank-label">Rank 6</div>
+                      <h4>Mandalorian</h4>
+                      <p>The final title is not granted lightly. It is proven through endurance, discipline, and resolve.</p>
+                    </article>
+                  </div>
+                </section>
+
+                <div class="mando-divider"></div>
+
+                <section class="mando-section" aria-labelledby="mando-notes">
+                  <h3 class="mando-section-title" id="mando-notes">07 &mdash; HUNTER'S FIELD NOTES</h3>
+                  <div class="mando-notes">
+                    <article class="mando-note-card">
+                      <h4>Stay Mobile</h4>
+                      <p>Never let the terrain decide the fight for you. Reposition early and often.</p>
+                    </article>
+                    <article class="mando-note-card">
+                      <h4>Everyone is Sus</h4>
+                      <p>Trust is expensive in the field. Treat every lead like it could turn sharp.</p>
+                    </article>
+                    <article class="mando-note-card">
+                      <h4>Mission Terminal First</h4>
+                      <p>Get your bearings and your route before the hunt pulls you into unnecessary detours.</p>
+                    </article>
+                    <article class="mando-note-card">
+                      <h4>Own Your Creed</h4>
+                      <p>This path is measured by what you finish, not what you claim.</p>
+                    </article>
+                    <article class="mando-note-card">
+                      <h4>World by World</h4>
+                      <p>Do not chase the end too early. Each world is meant to teach its own lesson.</p>
+                    </article>
+                    <article class="mando-note-card">
+                      <h4>The Hunt is Personal</h4>
+                      <p>Your informants and objectives are yours alone. Walk the path like it belongs to you.</p>
+                    </article>
+                  </div>
+                </section>
+
+                <div class="mando-divider"></div>
+
+                <section class="mando-finale" aria-label="Closing">
+                  <h3>THIS IS THE WAY.</h3>
+                  <p>It's only the beginning...</p>
+                </section>
               </div>
             </article>
 
