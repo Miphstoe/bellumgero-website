@@ -443,6 +443,77 @@
       line-height: 1.5;
     }
 
+    .event-section {
+      display: grid;
+      gap: 8px;
+      padding: 14px 15px;
+      border: 1px solid rgba(216, 231, 255, 0.12);
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at top right, rgba(242, 140, 27, 0.1), transparent 36%),
+        rgba(8, 17, 38, 0.66);
+    }
+
+    .event-section h4 {
+      margin: 0;
+      color: #ffbf74;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .event-section p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+
+    .event-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #d9e4ff;
+      line-height: 1.7;
+    }
+
+    .event-list li + li {
+      margin-top: 4px;
+    }
+
+    .event-boss-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .event-boss {
+      padding: 11px 12px;
+      border: 1px solid rgba(210, 75, 43, 0.32);
+      border-radius: 12px;
+      background:
+        linear-gradient(135deg, rgba(76, 13, 10, 0.32), rgba(29, 9, 11, 0.72)),
+        rgba(12, 8, 16, 0.84);
+      color: #ffe3d7;
+      font-weight: 700;
+      line-height: 1.45;
+      box-shadow: inset 0 0 0 1px rgba(255, 149, 109, 0.03);
+    }
+
+    .event-boss.final-boss {
+      border-color: rgba(255, 188, 107, 0.4);
+      color: #ffd38f;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 188, 107, 0.06),
+        0 0 18px rgba(242, 140, 27, 0.08);
+    }
+
+    .event-countdown {
+      color: #ffd38f;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
     .patch {
       border-left: 4px solid var(--accent);
       padding-left: 12px;
@@ -1226,6 +1297,7 @@
       .event-poster { min-height: 320px; border-right: 0; border-bottom: 1px solid rgba(216, 231, 255, 0.12); }
       .event-content { padding: 0 18px 20px; }
       .event-meta { grid-template-columns: 1fr; }
+      .event-boss-grid { grid-template-columns: 1fr; }
       .updates-layout { grid-template-columns: 1fr; }
       .mando-copy-panels,
       .mando-steps,
@@ -1314,20 +1386,20 @@
         <div class="grid">
           <article class="card featured-event" aria-labelledby="featured-event-title">
             <!-- Replace the poster image path below if a new event poster is used. -->
-            <div class="event-poster" role="img" aria-label="Hard City defense event poster placeholder">
+            <div class="event-poster" role="img" aria-label="Coronet defense event poster placeholder">
               <div class="event-poster-label">Live Server Event</div>
             </div>
             <div class="event-content">
               <header>
                 <div class="event-kicker">Featured Engagement</div>
-                <h3 class="event-title" id="featured-event-title">Defend Hard City!</h3>
-                <p class="event-flavor">Rori is under threat as enemy warlords converge on Hard City.</p>
+                <h3 class="event-title" id="featured-event-title">Siege of Coronet</h3>
+                <p class="event-flavor">Coronet, the Jewel of Corellia, is under attack as massive Graks descend on the starport.</p>
               </header>
 
               <div class="event-meta">
                 <div class="event-meta-item">
                   <span>Date</span>
-                  <strong>Sunday, 4/19/2026</strong>
+                  <strong>April 26, 2026</strong>
                 </div>
                 <div class="event-meta-item">
                   <span>Time</span>
@@ -1335,24 +1407,61 @@
                 </div>
                 <div class="event-meta-item">
                   <span>Location</span>
-                  <strong>Hard City, Rori</strong>
+                  <strong>Coronet, Corellia<br />In front of the Starport</strong>
                 </div>
               </div>
 
               <p class="event-description">
-                Players are urged to hold the forces of Rax Vorn, Kael Draxus, Velkor Thane, and Supreme Warlord Darth
-                Malvek from taking over the city in retaliation against the players. Hold the line, break the assault,
-                and defend Hard City.
+                Coronet, the capital city of Corellia, is one of the busiest hubs in the galaxy, and it is now facing a full-scale creature assault.
+                Massive Graks from Endor have emerged and are threatening to overrun the city unless players unite and hold the line.
               </p>
 
               <aside class="event-objective" aria-label="Mission objective">
                 <h4>Priority Warning</h4>
-                <p>Players will begin rallying their defenses in Hard City at 1:00 PM EST to prepare for battle.</p>
+                <p>Rally begins at <strong>1:00 PM EST</strong> for buffs and group formation before the assault starts at <strong>2:00 PM EST</strong>.</p>
               </aside>
+
+              <section class="event-section" aria-labelledby="event-overview-title">
+                <h4 id="event-overview-title">Encounter Overview</h4>
+                <p>
+                  Players must band together to defend Coronet from escalating waves of powerful Graks. Each phase introduces
+                  a stronger and more dangerous variant, culminating in a final world boss encounter.
+                </p>
+              </section>
+
+              <section class="event-section" aria-labelledby="event-bosses-title">
+                <h4 id="event-bosses-title">Boss Lineup</h4>
+                <div class="event-boss-grid">
+                  <div class="event-boss"><strong>Savage Rend Grak</strong></div>
+                  <div class="event-boss"><strong>Dreadmaw Devourer Grak</strong></div>
+                  <div class="event-boss"><strong>Apex Ravager Grak</strong></div>
+                  <div class="event-boss final-boss"><strong>Primordial Warlord Grak</strong><br />Final World Boss</div>
+                </div>
+              </section>
+
+              <section class="event-section" aria-labelledby="event-mechanics-title">
+                <h4 id="event-mechanics-title">Event Mechanics</h4>
+                <ul class="event-list">
+                  <li>Waves will spawn progressively with increasing difficulty.</li>
+                  <li>Each Grak introduces unique combat challenges.</li>
+                  <li>The final boss is designed as a large-scale world encounter.</li>
+                  <li>Expect high damage, area-of-effect attacks, and coordinated group requirements.</li>
+                </ul>
+              </section>
+
+              <section class="event-section" aria-labelledby="event-notes-title">
+                <h4 id="event-notes-title">Additional Notes</h4>
+                <ul class="event-list">
+                  <li>Buff providers will be available on-site before the event.</li>
+                  <li>Players are encouraged to arrive early for group formation.</li>
+                  <li>This is a large-scale PvE encounter designed for group participation.</li>
+                </ul>
+                <p class="event-countdown">Countdown: <span id="event-countdown">Calculating...</span></p>
+              </section>
 
               <div class="event-actions">
                 <a class="event-btn" href="https://discord.gg/jSsR2hQZGw" target="_blank" rel="noopener">Join the Defense</a>
-                <p class="event-cta-copy">Report to Hard City on Rori and prepare your defenses before the 2:00 PM EST assault begins.</p>
+                <p class="event-cta-copy">Rally your allies. Defend the city. Survive the onslaught.</p>
               </div>
             </div>
           </article>
@@ -2386,6 +2495,36 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         var patchNotes = document.querySelectorAll(".patch-note");
+        var countdownNode = document.getElementById("event-countdown");
+
+        if (countdownNode) {
+          var eventTime = new Date("2026-04-26T14:00:00-04:00");
+
+          function updateCountdown() {
+            var now = new Date();
+            var diff = eventTime.getTime() - now.getTime();
+
+            if (diff <= 0) {
+              countdownNode.textContent = "The assault is underway.";
+              return;
+            }
+
+            var totalMinutes = Math.floor(diff / 60000);
+            var days = Math.floor(totalMinutes / 1440);
+            var hours = Math.floor((totalMinutes % 1440) / 60);
+            var minutes = totalMinutes % 60;
+            var parts = [];
+
+            if (days > 0) parts.push(days + "d");
+            if (days > 0 || hours > 0) parts.push(hours + "h");
+            parts.push(minutes + "m");
+
+            countdownNode.textContent = parts.join(" ");
+          }
+
+          updateCountdown();
+          window.setInterval(updateCountdown, 60000);
+        }
 
         patchNotes.forEach(function (note, index) {
           var shouldStartOpen = index === 0;
