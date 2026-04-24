@@ -2725,8 +2725,24 @@
           return node && node.textContent ? node.textContent.trim() : "";
         }
 
+        function firstDefined(obj, keys) {
+          for (var i = 0; i < keys.length; i += 1) {
+            var value = obj && obj[keys[i]];
+            if (value !== undefined && value !== null && String(value).trim() !== "") {
+              return String(value).trim();
+            }
+          }
+
+          return "";
+        }
+
+        function normalizeOnline(value) {
+          var normalized = String(value).trim().toLowerCase();
+          return normalized === "true" || normalized === "online" || normalized === "1" || normalized === "yes";
+        }
+
         function setStatusDisplay(data) {
-          var isOnline = String(data.online).toLowerCase() === "true";
+          var isOnline = normalizeOnline(data.online);
           var badgeText = isOnline ? "Online" : "Offline";
 
           statusBadge.textContent = badgeText;
@@ -2752,34 +2768,81 @@
           });
         }
 
+        function parseStatusPayload(text) {
+          var trimmed = text.trim();
+
+          if (!trimmed) {
+            throw new Error("Empty status response");
+          }
+
+          if (trimmed.charAt(0) === "{" || trimmed.charAt(0) === "[") {
+            var json = JSON.parse(trimmed);
+
+            return {
+              online: firstDefined(json, ["online", "status", "serverStatus"]),
+              serverName: firstDefined(json, ["serverName", "name", "server"]),
+              playersOnline: firstDefined(json, ["playersOnline", "onlinePlayers", "players", "playerCount"]),
+              uptime: firstDefined(json, ["uptime", "uptimeText", "upTime"]),
+              lastUpdated: firstDefined(json, ["lastUpdated", "updatedAt", "timestamp"]),
+              statusMessage: firstDefined(json, ["statusMessage", "message"])
+            };
+          }
+
+          var xml = new DOMParser().parseFromString(trimmed, "application/xml");
+
+          if (xml.querySelector("parsererror")) {
+            throw new Error("Unsupported status response");
+          }
+
+          return {
+            online: textFromXml(xml, "online") || textFromXml(xml, "status"),
+            serverName: textFromXml(xml, "serverName") || textFromXml(xml, "name") || textFromXml(xml, "server"),
+            playersOnline: textFromXml(xml, "playersOnline") || textFromXml(xml, "onlinePlayers") || textFromXml(xml, "players") || textFromXml(xml, "playerCount"),
+            uptime: textFromXml(xml, "uptime") || textFromXml(xml, "uptimeText") || textFromXml(xml, "upTime"),
+            lastUpdated: textFromXml(xml, "lastUpdated") || textFromXml(xml, "updatedAt") || textFromXml(xml, "timestamp"),
+            statusMessage: textFromXml(xml, "statusMessage") || textFromXml(xml, "message")
+          };
+        }
+
         function fetchServerStatus() {
-          fetch("server-status.php", { cache: "no-store" })
-            .then(function (response) {
-              if (!response.ok) {
-                throw new Error("HTTP " + response.status);
-              }
+          var endpoints = ["/status", "/api/server-status", "server-status.php"];
+          var lastError = new Error("Status feed unavailable");
 
-              return response.text();
-            })
-            .then(function (xmlText) {
-              var xml = new DOMParser().parseFromString(xmlText, "application/xml");
+          function tryEndpoint(index) {
+            if (index >= endpoints.length) {
+              throw lastError;
+            }
 
-              if (xml.querySelector("parsererror")) {
-                throw new Error("Invalid XML response");
-              }
+            return fetch(endpoints[index], { cache: "no-store" })
+              .then(function (response) {
+                if (!response.ok) {
+                  throw new Error("HTTP " + response.status);
+                }
 
-              setStatusDisplay({
-                online: textFromXml(xml, "online"),
-                serverName: textFromXml(xml, "serverName"),
-                playersOnline: textFromXml(xml, "playersOnline"),
-                uptime: textFromXml(xml, "uptime"),
-                lastUpdated: textFromXml(xml, "lastUpdated"),
-                statusMessage: textFromXml(xml, "statusMessage")
+                return response.text();
+              })
+              .then(function (text) {
+                var parsed = parseStatusPayload(text);
+
+                if (!parsed.serverName) {
+                  parsed.serverName = "Bellum Gero";
+                }
+
+                if (!parsed.statusMessage) {
+                  parsed.statusMessage = "Status source: " + endpoints[index];
+                }
+
+                setStatusDisplay(parsed);
+              })
+              .catch(function (error) {
+                lastError = error;
+                return tryEndpoint(index + 1);
               });
-            })
-            .catch(function () {
-              setStatusError("Status feed unavailable");
-            });
+          }
+
+          tryEndpoint(0).catch(function () {
+            setStatusError("Status feed unavailable");
+          });
         }
 
         if (countdownNode) {
