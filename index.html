@@ -209,6 +209,122 @@
       background: rgba(8, 20, 44, 0.55);
     }
 
+    .status-widget {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid rgba(242, 140, 27, 0.24);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(242, 140, 27, 0.12), transparent 34%),
+        linear-gradient(155deg, rgba(8, 18, 41, 0.86), rgba(5, 14, 31, 0.92));
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 12px 28px rgba(0, 0, 0, 0.24);
+    }
+
+    .status-widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .status-widget-header h2 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 231, 255, 0.16);
+      background: rgba(8, 17, 38, 0.78);
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .status-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #7f8ea8;
+      box-shadow: 0 0 10px rgba(127, 142, 168, 0.35);
+    }
+
+    .status-badge.is-online {
+      color: #dff8e8;
+      border-color: rgba(92, 214, 138, 0.3);
+      background: rgba(13, 52, 30, 0.38);
+    }
+
+    .status-badge.is-online::before {
+      background: #5cd68a;
+      box-shadow: 0 0 12px rgba(92, 214, 138, 0.5);
+    }
+
+    .status-badge.is-offline {
+      color: #ffd7d7;
+      border-color: rgba(229, 89, 89, 0.3);
+      background: rgba(63, 16, 24, 0.38);
+    }
+
+    .status-badge.is-offline::before {
+      background: #e55959;
+      box-shadow: 0 0 12px rgba(229, 89, 89, 0.46);
+    }
+
+    .status-server-name {
+      margin-bottom: 12px;
+      color: #ffd38f;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.08rem;
+      letter-spacing: 0.05em;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .status-item {
+      padding: 11px 12px;
+      border: 1px solid rgba(216, 231, 255, 0.12);
+      border-radius: 12px;
+      background: rgba(8, 17, 38, 0.62);
+    }
+
+    .status-item span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .status-item strong {
+      color: var(--text);
+      font-size: 0.98rem;
+      line-height: 1.4;
+    }
+
+    .status-footnote {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
     .section {
       margin-bottom: 20px;
     }
@@ -1293,6 +1409,9 @@
       .grid { grid-template-columns: 1fr; }
       header { flex-direction: column; align-items: flex-start; }
       .tier-grid { grid-template-columns: 1fr; }
+      .status-widget-header,
+      .status-grid { grid-template-columns: 1fr; }
+      .status-widget-header { display: grid; justify-content: stretch; }
       .featured-event { grid-column: auto; grid-template-columns: 1fr; }
       .event-poster { min-height: 320px; border-right: 0; border-bottom: 1px solid rgba(216, 231, 255, 0.12); }
       .event-content { padding: 0 18px 20px; }
@@ -1362,6 +1481,33 @@
             <span class="pill">World Bosses</span>
             <span class="pill">Builder-Friendly Housing</span>
           </div>
+
+          <section class="status-widget" aria-labelledby="server-status-title">
+            <div class="status-widget-header">
+              <h2 id="server-status-title">Server Status</h2>
+              <span class="status-badge" id="server-status-badge">Checking</span>
+            </div>
+            <div class="status-server-name" id="server-status-name">Bellum Gero</div>
+            <div class="status-grid">
+              <div class="status-item">
+                <span>State</span>
+                <strong id="server-status-state">Checking...</strong>
+              </div>
+              <div class="status-item">
+                <span>Players Online</span>
+                <strong id="server-status-players">Loading...</strong>
+              </div>
+              <div class="status-item">
+                <span>Uptime</span>
+                <strong id="server-status-uptime">Loading...</strong>
+              </div>
+              <div class="status-item">
+                <span>Endpoint</span>
+                <strong>15.204.163.178:44455</strong>
+              </div>
+            </div>
+            <p class="status-footnote" id="server-status-updated">Refreshing live status...</p>
+          </section>
         </div>
 
         <aside class="panel" id="community">
@@ -2567,6 +2713,73 @@
       document.addEventListener("DOMContentLoaded", function () {
         var patchNotes = document.querySelectorAll(".patch-note");
         var countdownNode = document.getElementById("event-countdown");
+        var statusBadge = document.getElementById("server-status-badge");
+        var statusName = document.getElementById("server-status-name");
+        var statusState = document.getElementById("server-status-state");
+        var statusPlayers = document.getElementById("server-status-players");
+        var statusUptime = document.getElementById("server-status-uptime");
+        var statusUpdated = document.getElementById("server-status-updated");
+
+        function textFromXml(xml, tagName) {
+          var node = xml.querySelector(tagName);
+          return node && node.textContent ? node.textContent.trim() : "";
+        }
+
+        function setStatusDisplay(data) {
+          var isOnline = String(data.online).toLowerCase() === "true";
+          var badgeText = isOnline ? "Online" : "Offline";
+
+          statusBadge.textContent = badgeText;
+          statusBadge.classList.remove("is-online", "is-offline");
+          statusBadge.classList.add(isOnline ? "is-online" : "is-offline");
+
+          statusName.textContent = data.serverName || "Bellum Gero";
+          statusState.textContent = badgeText;
+          statusPlayers.textContent = data.playersOnline || "Unavailable";
+          statusUptime.textContent = data.uptime || "Unavailable";
+          statusUpdated.textContent = data.lastUpdated
+            ? "Last updated: " + data.lastUpdated
+            : "Live status feed active.";
+        }
+
+        function setStatusError(message) {
+          setStatusDisplay({
+            online: "false",
+            serverName: "Bellum Gero",
+            playersOnline: "Unavailable",
+            uptime: "Unavailable",
+            lastUpdated: message || "Status feed unavailable"
+          });
+        }
+
+        function fetchServerStatus() {
+          fetch("server-status.php", { cache: "no-store" })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+              }
+
+              return response.text();
+            })
+            .then(function (xmlText) {
+              var xml = new DOMParser().parseFromString(xmlText, "application/xml");
+
+              if (xml.querySelector("parsererror")) {
+                throw new Error("Invalid XML response");
+              }
+
+              setStatusDisplay({
+                online: textFromXml(xml, "online"),
+                serverName: textFromXml(xml, "serverName"),
+                playersOnline: textFromXml(xml, "playersOnline"),
+                uptime: textFromXml(xml, "uptime"),
+                lastUpdated: textFromXml(xml, "lastUpdated")
+              });
+            })
+            .catch(function () {
+              setStatusError("Status feed unavailable");
+            });
+        }
 
         if (countdownNode) {
           var eventTime = new Date("2026-04-26T14:00:00-04:00");
@@ -2595,6 +2808,11 @@
 
           updateCountdown();
           window.setInterval(updateCountdown, 60000);
+        }
+
+        if (statusBadge && statusState && statusPlayers && statusUptime && statusUpdated) {
+          fetchServerStatus();
+          window.setInterval(fetchServerStatus, 60000);
         }
 
         patchNotes.forEach(function (note, index) {
