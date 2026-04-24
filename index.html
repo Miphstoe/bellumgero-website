@@ -1494,10 +1494,6 @@
                 <strong id="server-status-state">Checking...</strong>
               </div>
               <div class="status-item">
-                <span>Players Online</span>
-                <strong id="server-status-players">Loading...</strong>
-              </div>
-              <div class="status-item">
                 <span>Uptime</span>
                 <strong id="server-status-uptime">Loading...</strong>
               </div>
@@ -2716,7 +2712,6 @@
         var statusBadge = document.getElementById("server-status-badge");
         var statusName = document.getElementById("server-status-name");
         var statusState = document.getElementById("server-status-state");
-        var statusPlayers = document.getElementById("server-status-players");
         var statusUptime = document.getElementById("server-status-uptime");
         var statusUpdated = document.getElementById("server-status-updated");
 
@@ -2751,7 +2746,6 @@
 
           statusName.textContent = data.serverName || "Bellum Gero";
           statusState.textContent = badgeText;
-          statusPlayers.textContent = data.playersOnline || "Unavailable";
           statusUptime.textContent = data.uptime || "Unavailable";
           statusUpdated.textContent = data.statusMessage
             ? data.statusMessage + (data.lastUpdated ? " Last updated: " + data.lastUpdated : "")
@@ -2762,7 +2756,6 @@
           setStatusDisplay({
             online: "false",
             serverName: "Bellum Gero",
-            playersOnline: "Unavailable",
             uptime: "Unavailable",
             lastUpdated: message || "Status feed unavailable"
           });
@@ -2874,7 +2867,7 @@
           window.setInterval(updateCountdown, 60000);
         }
 
-        if (statusBadge && statusState && statusPlayers && statusUptime && statusUpdated) {
+        if (statusBadge && statusState && statusUptime && statusUpdated) {
           fetchServerStatus();
           window.setInterval(fetchServerStatus, 60000);
         }
