@@ -13,11 +13,15 @@ $online = false;
 $playersOnline = 'Unavailable';
 $uptime = 'Unavailable';
 $rawResponse = '';
+$statusMessage = 'Status check not started.';
+$errorNumber = 0;
+$errorString = '';
 
 $socket = @fsockopen($host, $port, $errorNumber, $errorString, $timeoutSeconds);
 
 if (is_resource($socket)) {
     $online = true;
+    $statusMessage = 'TCP connection established.';
     stream_set_timeout($socket, 1);
 
     while (!feof($socket)) {
@@ -35,6 +39,8 @@ if (is_resource($socket)) {
     }
 
     fclose($socket);
+} else {
+    $statusMessage = 'TCP connection failed.';
 }
 
 if ($rawResponse !== '') {
@@ -57,7 +63,13 @@ if ($rawResponse !== '') {
         if ($xmlUptime !== '') {
             $uptime = $xmlUptime;
         }
+
+        $statusMessage = 'TCP connection established and XML status payload parsed.';
+    } else {
+        $statusMessage = 'TCP connection established, but the server did not return parseable XML status data.';
     }
+} elseif ($online) {
+    $statusMessage = 'TCP connection established, but no XML status payload was returned.';
 }
 
 $response = new DOMDocument('1.0', 'UTF-8');
@@ -72,6 +84,9 @@ $root->appendChild($response->createElement('port', (string) $port));
 $root->appendChild($response->createElement('online', $online ? 'true' : 'false'));
 $root->appendChild($response->createElement('playersOnline', $playersOnline));
 $root->appendChild($response->createElement('uptime', $uptime));
+$root->appendChild($response->createElement('statusMessage', $statusMessage));
+$root->appendChild($response->createElement('errorNumber', (string) $errorNumber));
+$root->appendChild($response->createElement('errorString', $errorString));
 $root->appendChild($response->createElement('responseTimeMs', (string) round((microtime(true) - $startedAt) * 1000)));
 $root->appendChild($response->createElement('lastUpdated', gmdate('Y-m-d H:i:s') . ' UTC'));
 

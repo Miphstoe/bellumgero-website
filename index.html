@@ -2737,9 +2737,9 @@
           statusState.textContent = badgeText;
           statusPlayers.textContent = data.playersOnline || "Unavailable";
           statusUptime.textContent = data.uptime || "Unavailable";
-          statusUpdated.textContent = data.lastUpdated
-            ? "Last updated: " + data.lastUpdated
-            : "Live status feed active.";
+          statusUpdated.textContent = data.statusMessage
+            ? data.statusMessage + (data.lastUpdated ? " Last updated: " + data.lastUpdated : "")
+            : (data.lastUpdated ? "Last updated: " + data.lastUpdated : "Live status feed active.");
         }
 
         function setStatusError(message) {
@@ -2773,7 +2773,8 @@
                 serverName: textFromXml(xml, "serverName"),
                 playersOnline: textFromXml(xml, "playersOnline"),
                 uptime: textFromXml(xml, "uptime"),
-                lastUpdated: textFromXml(xml, "lastUpdated")
+                lastUpdated: textFromXml(xml, "lastUpdated"),
+                statusMessage: textFromXml(xml, "statusMessage")
               });
             })
             .catch(function () {
