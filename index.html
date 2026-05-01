@@ -1287,6 +1287,25 @@
       letter-spacing: 0.04em;
     }
 
+    .photo-winners {
+      margin-bottom: 16px;
+    }
+
+    .photo-winners-gallery {
+      display: grid;
+      gap: 12px;
+    }
+
+    .photo-winner-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(242, 140, 27, 0.28);
+      background: rgba(7, 18, 40, 0.72);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24);
+    }
+
     .patch-note {
       padding: 0;
       overflow: hidden;
@@ -1651,6 +1670,17 @@
       <section class="section">
         <div class="updates-layout">
           <div class="updates-column">
+            <section class="photo-winners" aria-labelledby="photo-contest-winners-title">
+              <h2 id="photo-contest-winners-title">April 2026 Photo Contest Winners</h2>
+              <article class="card">
+                <div class="photo-winners-gallery">
+                  <img class="photo-winner-image" src="/images/1stplace.png" alt="1st Place" />
+                  <img class="photo-winner-image" src="/images/2ndplace.png" alt="2nd Place" />
+                  <img class="photo-winner-image" src="/images/3rdplace.png" alt="3rd Place" />
+                </div>
+              </article>
+            </section>
+
             <h2>Coming Soon to Bellum Gero</h2>
             <article class="card mando-feature">
               <div class="mando-feature-inner">
