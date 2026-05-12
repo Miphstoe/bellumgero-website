@@ -1,0 +1,37 @@
+services:
+  bellum-wiki-db:
+    image: postgres:16-alpine
+    container_name: bellum-wiki-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  bellum-wiki:
+    image: requarks/wiki:2
+    container_name: bellum-wiki
+    restart: unless-stopped
+    depends_on:
+      bellum-wiki-db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: bellum-wiki-db
+      DB_PORT: 5432
+      DB_USER: ${POSTGRES_USER}
+      DB_PASS: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+    ports:
+      - "${WIKI_PORT:-3001}:3000"

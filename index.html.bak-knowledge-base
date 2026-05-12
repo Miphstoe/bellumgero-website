@@ -1472,7 +1472,6 @@
       <nav>
         <a class="nav-play-now" href="http://15.204.163.178/tre/BellumGero%20Launcher_0.1.0_x64-setup.exe">Play Now</a>
         <a href="skills.html">Skill Calculator</a>
-        <a href="https://wiki.bellumgero.net" target="_blank" rel="noopener noreferrer">Knowledge Base</a>
         <a href="#features">Server Features</a>
         <a href="#patch-notes">Patch Notes</a>
         <a href="https://galaxyharvester.net/" target="_blank" rel="noopener noreferrer">Galaxy Harvester</a>
@@ -1662,17 +1661,6 @@
               <li>Maintenance removal option for structures</li>
               <li>Attachment Exchange Vendor</li>
             </ul>
-          </article>
-
-          <article class="card">
-            <h3>Knowledge Base</h3>
-            <p>
-              Explore Bellum Gero guides, custom systems, profession information, Jedi progression,
-              event history, troubleshooting help, and player-created documentation.
-            </p>
-            <div class="actions" style="margin-top:12px;">
-              <a class="btn btn-ghost" href="https://wiki.bellumgero.net" target="_blank" rel="noopener noreferrer">Open Knowledge Base</a>
-            </div>
           </article>
 
         </div>
